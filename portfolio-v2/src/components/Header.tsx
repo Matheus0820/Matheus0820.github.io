@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Github, Linkedin, Mail, Globe } from 'lucide-react';
+import { Menu, X, Sun, Moon, Github, BookOpen, Mail, Globe } from 'lucide-react';
 import { socialLinks } from '../data/portfolio';
 
 export function Header() {
@@ -161,7 +161,7 @@ export function Header() {
                         whileHover={{ scale: 1.2, y: -2 }}
                       >
                         {social.icon === 'github' && <Github className="w-5 h-5" />}
-                        {social.icon === 'linkedin' && <Linkedin className="w-5 h-5" />}
+                        {social.icon === 'book' && <BookOpen className="w-5 h-5" />}
                         {social.icon === 'mail' && <Mail className="w-5 h-5" />}
                         {social.icon === 'globe' && <Globe className="w-5 h-5" />}
                       </motion.a>

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Globe, Heart, Code, Rocket, Brain } from 'lucide-react';
-import { socialLinks, personalInfo } from '../data/portfolio';
+import { Github, BookOpen, Mail, Globe, Heart, Code, Rocket, Brain } from 'lucide-react';
+import { socialLinks } from '../data/portfolio';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -23,7 +23,7 @@ export function Footer() {
               <span className="text-lg font-semibold text-dark-900 dark:text-dark-50">Matheus Ramos</span>
             </motion.div>
             <p className="text-dark-600 dark:text-dark-400 max-w-xs leading-relaxed">
-              Desenvolvedor Full Stack & Pesquisador em ML/IoT. Fundador da Opten Solutions.
+              Programador Full Stack & Pesquisador Operacional. Fundador da Opt.en Solutions.
               Construindo o futuro com código.
             </p>
             <div className="flex items-center gap-4 pt-2">
@@ -38,7 +38,7 @@ export function Footer() {
                   aria-label={social.name}
                 >
                   {social.icon === 'github' && <Github className="w-5 h-5" />}
-                  {social.icon === 'linkedin' && <Linkedin className="w-5 h-5" />}
+                  {social.icon === 'book' && <BookOpen className="w-5 h-5" />}
                   {social.icon === 'mail' && <Mail className="w-5 h-5" />}
                   {social.icon === 'globe' && <Globe className="w-5 h-5" />}
                 </motion.a>
@@ -57,7 +57,7 @@ export function Footer() {
             <nav className="space-y-3" aria-label="Navegação do rodapé">
               {[
                 { href: '#sobre', label: 'Sobre Mim', icon: Code },
-                { href: '#startup', label: 'Opten Solutions', icon: Rocket },
+                { href: '#startup', label: 'Opt.en Solutions', icon: Rocket },
                 { href: '#projetos', label: 'Projetos', icon: Code },
                 { href: '#habilidades', label: 'Habilidades', icon: Brain },
                 { href: '#contato', label: 'Contato', icon: Mail },
@@ -88,7 +88,7 @@ export function Footer() {
           >
             <h4 className="font-semibold text-dark-900 dark:text-dark-50 mb-4">Tecnologias Principais</h4>
             <div className="flex flex-wrap gap-2">
-              {['TypeScript', 'React', 'Python', 'Node.js', 'Go', 'Docker', 'AWS', 'PostgreSQL', 'Tailwind', 'MQTT'].map((tech) => (
+              {['Python', 'Django', 'JavaScript', 'TypeScript', 'React', 'Google OR-Tools', 'Pandas', 'Java', 'VHDL', 'Git'].map((tech) => (
                 <motion.span
                   key={tech}
                   className="skill-badge"

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Github, Linkedin, Globe, MapPin, Send, MessageSquare, ExternalLink } from 'lucide-react';
-import { socialLinks, personalInfo } from '../data/portfolio';
+import { Mail, Github, BookOpen, Globe, MapPin, Send, MessageSquare, ExternalLink } from 'lucide-react';
+import { personalInfo } from '../data/portfolio';
 
 export function Contact() {
   const containerVariants = {
@@ -103,7 +103,7 @@ export function Contact() {
                   label="Email"
                   value={personalInfo.email}
                   href={`mailto:${personalInfo.email}`}
-                  description="Respondo em até 24h"
+                  description="Contato principal"
                 />
                 <ContactItem
                   icon={<Github className="w-5 h-5" />}
@@ -113,24 +113,24 @@ export function Contact() {
                   description="Projetos e contribuições"
                 />
                 <ContactItem
-                  icon={<Linkedin className="w-5 h-5" />}
-                  label="LinkedIn"
-                  value="matheus-ramos"
-                  href={personalInfo.linkedin}
-                  description="Networking profissional"
+                  icon={<BookOpen className="w-5 h-5" />}
+                  label="Currículo Lattes"
+                  value="lattes.cnpq.br/3863511228005347"
+                  href={personalInfo.lattes}
+                  description="Produção acadêmica"
                 />
                 <ContactItem
                   icon={<Globe className="w-5 h-5" />}
-                  label="Opten Solutions"
+                  label="Opt.en Solutions"
                   value="optensolutions.vercel.app"
                   href="https://optensolutions.vercel.app/"
-                  description="Minha startup"
+                  description="Minha startup (Inova Simples)"
                 />
                 <ContactItem
                   icon={<MapPin className="w-5 h-5" />}
                   label="Localização"
                   value={personalInfo.location}
-                  description="Disponível para remoto/híbrido"
+                  description="Natal e região"
                 />
               </div>
             </motion.div>
@@ -139,14 +139,14 @@ export function Contact() {
             <motion.div className="card" whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} initial={{ opacity: 0, y: 20 }}>
               <h3 className="text-xl font-semibold text-dark-900 dark:text-dark-50 mb-4 flex items-center gap-2">
                 <Send className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                Disponibilidade
+                Atuação e Interesses
               </h3>
               <div className="space-y-3">
                 {[
-                  { label: 'Tipo de trabalho', value: 'Remoto / Híbrido / Presencial (Natal-RN)' },
-                  { label: 'Disponibilidade', value: 'Imediata' },
-                  { label: 'Interesses', value: 'Full-stack, ML/IoT, Startups, Pesquisa' },
-                  { label: 'Contratação', value: 'CLT, PJ, Estágio, Freelance' },
+                  { label: 'Atuação atual', value: 'Bolsista PRH-25 ANP • Fundador da Opt.en Solutions' },
+                  { label: 'Formação', value: 'Ciências e Tecnologia (Tecnologia da Computação) • UFRN' },
+                  { label: 'Interesses', value: 'Full Stack, Pesquisa Operacional, Otimização, Machine Learning' },
+                  { label: 'Parcerias', value: 'Empresas de instalação e manutenção de painéis solares' },
                 ].map((item, index) => (
                   <motion.div
                     key={index}

@@ -30,10 +30,10 @@ export function Skills() {
   };
 
   const categoryConfig = {
-    language: { label: 'Linguagens', icon: Code, color: 'primary', bg: 'bg-primary-100 dark:bg-primary-900/30' },
-    framework: { label: 'Frameworks & Libs', icon: Layers, color: 'violet', bg: 'bg-violet-100 dark:bg-violet-900/30' },
-    tool: { label: 'Ferramentas & Cloud', icon: Wrench, color: 'amber', bg: 'bg-amber-100 dark:bg-amber-900/30' },
-    concept: { label: 'Conceitos & Domínios', icon: Lightbulb, color: 'emerald', bg: 'bg-emerald-100 dark:bg-emerald-900/30' },
+    language: { label: 'Linguagens', icon: Code, bg: 'bg-primary-100 dark:bg-primary-900/30', border: 'border-primary-200 dark:border-primary-800', active: 'bg-primary-600', from: '#0ea5e9', to: '#0284c7', light: '#38bdf8' },
+    framework: { label: 'Frameworks & Libs', icon: Layers, bg: 'bg-violet-100 dark:bg-violet-900/30', border: 'border-violet-200 dark:border-violet-800', active: 'bg-violet-600', from: '#8b5cf6', to: '#7c3aed', light: '#a78bfa' },
+    tool: { label: 'Ferramentas & Cloud', icon: Wrench, bg: 'bg-amber-100 dark:bg-amber-900/30', border: 'border-amber-200 dark:border-amber-800', active: 'bg-amber-600', from: '#f59e0b', to: '#d97706', light: '#fbbf24' },
+    concept: { label: 'Conceitos & Domínios', icon: Lightbulb, bg: 'bg-emerald-100 dark:bg-emerald-900/30', border: 'border-emerald-200 dark:border-emerald-800', active: 'bg-emerald-600', from: '#10b981', to: '#059669', light: '#34d399' },
   } as const;
 
   const categories = ['language', 'framework', 'tool', 'concept'] as const;
@@ -78,13 +78,13 @@ export function Skills() {
               aria-selected={activeCategory === cat}
               className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
                 activeCategory === cat
-                  ? `bg-${categoryConfig[cat].color}-600 text-white shadow-lg`
+                  ? `${categoryConfig[cat].active} text-white shadow-lg`
                   : 'bg-white dark:bg-dark-900 text-dark-600 dark:text-dark-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 dark:hover:text-primary-400 border border-dark-200 dark:border-dark-700'
               }`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <categoryConfig[cat].icon className="w-4 h-4 inline mr-2" />
+              {(() => { const Icon = categoryConfig[cat].icon; return <Icon className="w-4 h-4 inline mr-2" />; })()}
               {categoryConfig[cat].label}
             </motion.button>
           ))}
@@ -103,8 +103,7 @@ export function Skills() {
                 key={skill.name}
                 skill={skill}
                 index={index}
-                categoryColor={categoryConfig[activeCategory].color}
-                categoryBg={categoryConfig[activeCategory].bg}
+                config={categoryConfig[activeCategory]}
               />
             ))}
         </motion.div>
@@ -120,10 +119,10 @@ export function Skills() {
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { level: 'Especialista', desc: 'Uso avançado, arquitetura, otimização', color: 'emerald' },
-              { level: 'Avançado', desc: 'Desenvolvimento completo, boas práticas', color: 'blue' },
-              { level: 'Intermediário', desc: 'Desenvolvimento funcional, aprendendo', color: 'amber' },
-              { level: 'Básico', desc: 'Conceitos fundamentais, estudando', color: 'gray' },
+              { level: 'Especialista', desc: 'Uso avançado, arquitetura, otimização', dot: 'bg-emerald-500' },
+              { level: 'Avançado', desc: 'Desenvolvimento completo, boas práticas', dot: 'bg-blue-500' },
+              { level: 'Intermediário', desc: 'Desenvolvimento funcional, aprendendo', dot: 'bg-amber-500' },
+              { level: 'Básico', desc: 'Conceitos fundamentais, estudando', dot: 'bg-gray-500' },
             ].map((item, index) => (
               <motion.div
                 key={item.level}
@@ -134,7 +133,7 @@ export function Skills() {
                 transition={{ delay: index * 0.1 }}
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <div className={`w-3 h-3 rounded-full bg-${item.color}-500`} />
+                  <div className={`w-3 h-3 rounded-full ${item.dot}`} />
                   <span className="font-medium text-dark-900 dark:text-dark-50">{item.level}</span>
                 </div>
                 <p className="text-sm text-dark-500 dark:text-dark-400">{item.desc}</p>
@@ -147,37 +146,49 @@ export function Skills() {
   );
 }
 
-function SkillCard({ skill, index, categoryColor, categoryBg }: { skill: Skill; index: number; categoryColor: string; categoryBg: string }) {
+interface CategoryStyle {
+  bg: string;
+  border: string;
+  from: string;
+  to: string;
+  light: string;
+}
+
+function SkillCard({ skill, index, config }: { skill: Skill; index: number; config: CategoryStyle }) {
   const iconMap: Record<string, React.ReactNode> = {
     TypeScript: <Code className="w-5 h-5" />,
     JavaScript: <Code className="w-5 h-5" />,
     Python: <Brain className="w-5 h-5" />,
-    Go: <Cpu className="w-5 h-5" />,
+    'C++': <Cpu className="w-5 h-5" />,
     Java: <Code className="w-5 h-5" />,
     VHDL: <Cpu className="w-5 h-5" />,
-    SQL: <Database className="w-5 h-5" />,
+    AMPL: <Cpu className="w-5 h-5" />,
+    Go: <Cpu className="w-5 h-5" />,
     React: <Layers className="w-5 h-5" />,
-    Next: <Globe className="w-5 h-5" />,
     Node: <Server className="w-5 h-5" />,
+    Express: <Server className="w-5 h-5" />,
     Django: <Layers className="w-5 h-5" />,
-    FastAPI: <Zap className="w-5 h-5" />,
+    Flask: <Layers className="w-5 h-5" />,
+    Bootstrap: <Layers className="w-5 h-5" />,
     Tailwind: <Layers className="w-5 h-5" />,
     Framer: <Zap className="w-5 h-5" />,
+    Pytest: <Wrench className="w-5 h-5" />,
+    Pandas: <Database className="w-5 h-5" />,
+    NumPy: <Database className="w-5 h-5" />,
+    LangChain: <Brain className="w-5 h-5" />,
     Git: <Code className="w-5 h-5" />,
-    Docker: <Server className="w-5 h-5" />,
-    AWS: <Globe className="w-5 h-5" />,
-    PostgreSQL: <Database className="w-5 h-5" />,
-    MongoDB: <Database className="w-5 h-5" />,
-    Redis: <Database className="w-5 h-5" />,
-    Linux: <Cpu className="w-5 h-5" />,
+    Google: <Cpu className="w-5 h-5" />,
+    Jupyter: <Code className="w-5 h-5" />,
+    Vercel: <Globe className="w-5 h-5" />,
+    Modelagem: <Layers className="w-5 h-5" />,
+    Pesquisa: <Brain className="w-5 h-5" />,
+    Roteiriza: <Globe className="w-5 h-5" />,
     Machine: <Brain className="w-5 h-5" />,
     LLMs: <Brain className="w-5 h-5" />,
-    IoT: <Globe className="w-5 h-5" />,
     APIs: <Zap className="w-5 h-5" />,
-    Micro: <Server className="w-5 h-5" />,
-    CI: <Zap className="w-5 h-5" />,
-    Arquitetura: <Layers className="w-5 h-5" />,
     Testes: <Wrench className="w-5 h-5" />,
+    'Análise': <Lightbulb className="w-5 h-5" />,
+    Gerenciamento: <Layers className="w-5 h-5" />,
   };
 
   const getIcon = (name: string) => {
@@ -189,17 +200,17 @@ function SkillCard({ skill, index, categoryColor, categoryBg }: { skill: Skill; 
 
   return (
     <motion.div
-      className={`card relative overflow-hidden group ${categoryBg} border-${categoryColor}-200 dark:border-${categoryColor}-800`}
+      className={`card relative overflow-hidden group ${config.bg} ${config.border}`}
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ delay: index * 0.05, duration: 0.4 }}
       whileHover={{ y: -6, boxShadow: `0 20px 40px -10px rgba(14, 165, 233, 0.2)` }}
     >
-      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-transparent to-current opacity-10" style={{ '--tw-gradient-from': `var(--${categoryColor}-500)` }} />
+      <div className="absolute top-0 right-0 w-24 h-24 opacity-10" style={{ background: `linear-gradient(to bottom left, transparent, ${config.from})` }} />
 
       <div className="relative z-10 flex items-start gap-4">
-        <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white flex-shrink-0`} style={{ background: `linear-gradient(135deg, var(--${categoryColor}-500), var(--${categoryColor}-600))` }}>
+        <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white flex-shrink-0`} style={{ background: `linear-gradient(135deg, ${config.from}, ${config.to})` }}>
           {getIcon(skill.name)}
         </div>
         <div className="flex-1 min-w-0">
@@ -220,7 +231,7 @@ function SkillCard({ skill, index, categoryColor, categoryBg }: { skill: Skill; 
       >
         <motion.div
           className="h-full rounded-full"
-          style={{ background: `linear-gradient(90deg, var(--${categoryColor}-500), var(--${categoryColor}-400))` }}
+          style={{ background: `linear-gradient(90deg, ${config.from}, ${config.light})` }}
           initial={{ width: 0 }}
           animate={{ width: getProficiencyWidth(skill.name) }}
           transition={{ delay: 0.5 + index * 0.05, duration: 1, ease: 'easeOut' }}
@@ -231,9 +242,16 @@ function SkillCard({ skill, index, categoryColor, categoryBg }: { skill: Skill; 
 }
 
 function getProficiencyWidth(skill: string): string {
-  const expert = ['TypeScript', 'JavaScript', 'Python', 'React', 'Node.js', 'Git', 'SQL'];
-  const advanced = ['Go', 'Django', 'Tailwind', 'Docker', 'PostgreSQL', 'AWS', 'APIs', 'Machine Learning'];
-  const intermediate = ['Java', 'VHDL', 'Next.js', 'FastAPI', 'Framer', 'MongoDB', 'Redis', 'Linux', 'LLMs', 'IoT', 'Micro', 'CI', 'Arquitetura', 'Testes'];
+  // Estimativa de nível a partir do currículo; ajuste conforme sua percepção.
+  const expert = ['Python', 'JavaScript', 'Django', 'Git'];
+  const advanced = [
+    'Java', 'TypeScript', 'React', 'Node.js', 'Express.js', 'Pytest', 'Pandas', 'NumPy', 'GitHub',
+    'Google OR-Tools', 'Pesquisa Operacional', 'Roteirização (VRP)', 'APIs REST', 'Testes Automatizados', 'Análise de Requisitos',
+  ];
+  const intermediate = [
+    'C', 'C++', 'Go', 'VHDL', 'AMPL', 'Flask', 'Bootstrap', 'Tailwind CSS', 'Framer Motion', 'LangChain',
+    'Jupyter', 'Vercel', 'Machine Learning', 'LLMs & RAG', 'Gerenciamento Ágil', 'Modelagem 3D (CAD)',
+  ];
 
   if (expert.includes(skill)) return '95%';
   if (advanced.includes(skill)) return '80%';

@@ -57,7 +57,7 @@ export function Hero() {
           <motion.div variants={itemVariants} className="mb-6">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium border border-primary-200 dark:border-primary-800">
               <Zap className="w-4 h-4" />
-              Desenvolvedor Full Stack • Pesquisador ML/IoT • Fundador Opten Solutions
+              Desenvolvedor Full Stack • Pesquisador Operacional • Fundador Opt.en Solutions
             </span>
           </motion.div>
 
@@ -74,12 +74,10 @@ export function Hero() {
             variants={itemVariants}
             className="text-xl sm:text-2xl lg:text-3xl text-dark-600 dark:text-dark-300 mb-8 max-w-3xl mx-auto leading-relaxed"
           >
-            Construo aplicações web escaláveis, pesquisador em{' '}
-            <span className="font-medium text-primary-600 dark:text-primary-400">Machine Learning</span>{' '}
-            e{' '}
-            <span className="font-medium text-primary-600 dark:text-primary-400">IoT</span>,{' '}
-            fundador da{' '}
-            <span className="font-medium text-primary-600 dark:text-primary-400">Opten Solutions</span>
+            Desenvolvo aplicações web, crio algoritmos de{' '}
+            <span className="font-medium text-primary-600 dark:text-primary-400">otimização de rotas</span>{' '}
+            como pesquisador operacional e sou fundador da{' '}
+            <span className="font-medium text-primary-600 dark:text-primary-400">Opt.en Solutions</span>
           </motion.p>
 
           {/* Stats */}
@@ -87,10 +85,10 @@ export function Hero() {
             variants={itemVariants}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 max-w-2xl mx-auto"
           >
-            <StatCard label="Anos de Estudo" value="4+" icon={<Code className="w-6 h-6" />} />
-            <StatCard label="Projetos no GitHub" value="15+" icon={<Rocket className="w-6 h-6" />} />
-            <StatCard label="Tecnologias" value="20+" icon={<Brain className="w-6 h-6" />} />
-            <StatCard label="Startup" value="Opten" icon={<Zap className="w-6 h-6" />} />
+            <StatCard label="Anos de Experiência" value="3+" icon={<Code className="w-6 h-6" />} />
+            <StatCard label="Período na UFRN" value="6º" icon={<Rocket className="w-6 h-6" />} />
+            <StatCard label="Resumo em Anais" value="1" icon={<Brain className="w-6 h-6" />} />
+            <StatCard label="Startup" value="Opt.en" icon={<Zap className="w-6 h-6" />} />
           </motion.div>
 
           {/* CTA Buttons */}
@@ -131,7 +129,7 @@ export function Hero() {
             variants={itemVariants}
             className="flex flex-wrap items-center justify-center gap-3 opacity-60"
           >
-            {['TypeScript', 'React', 'Python', 'Node.js', 'Go', 'Docker', 'AWS', 'PostgreSQL', 'Tailwind', 'MQTT'].map((tech) => (
+            {['Python', 'Django', 'JavaScript', 'TypeScript', 'React', 'Google OR-Tools', 'Pandas', 'Java', 'VHDL', 'Git'].map((tech) => (
               <motion.span
                 key={tech}
                 className="skill-badge"

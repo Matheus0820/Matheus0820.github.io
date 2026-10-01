@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import { GraduationCap, Briefcase, Code, Brain, Zap, Github, Linkedin, Mail, MapPin } from 'lucide-react';
-import { personalInfo, education, experience } from '../data/portfolio';
+import { GraduationCap, Briefcase, Code, Brain, Rocket, Zap, Github, BookOpen, Mail, MapPin, ExternalLink } from 'lucide-react';
+import { personalInfo, education, experience, participations } from '../data/portfolio';
 
 export function About() {
   const containerVariants = {
@@ -64,9 +64,9 @@ export function About() {
             {/* Personal Info Grid */}
             <motion.div className="grid md:grid-cols-2 gap-4" whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} initial={{ opacity: 0, y: 20 }}>
               <InfoCard icon={<MapPin className="w-5 h-5" />} label="Localização" value={personalInfo.location} />
-              <InfoCard icon={<Mail className="w-5 h-5" />} label="Email" value={personalInfo.email} />
+              <InfoCard icon={<Mail className="w-5 h-5" />} label="Email" value={personalInfo.email} href={`mailto:${personalInfo.email}`} />
               <InfoCard icon={<Github className="w-5 h-5" />} label="GitHub" value="@Matheus0820" href={personalInfo.github} />
-              <InfoCard icon={<Linkedin className="w-5 h-5" />} label="LinkedIn" value="matheus-ramos" href={personalInfo.linkedin} />
+              <InfoCard icon={<BookOpen className="w-5 h-5" />} label="Currículo Lattes" value="Matheus Ramos" href={personalInfo.lattes} />
             </motion.div>
 
             {/* Education */}
@@ -145,10 +145,10 @@ export function About() {
                 Destaques
               </h3>
               <div className="space-y-4">
-                <StatHighlight icon={<Brain className="w-5 h-5" />} label="Pesquisa ML/IoT" value="PRH-25 ANP" color="primary" />
-                <StatHighlight icon={<Rocket className="w-5 h-5" />} label="Startup" value="Opten Solutions" color="amber" />
-                <StatHighlight icon={<Code className="w-5 h-5" />} label="Linguagens" value="7+" color="emerald" />
-                <StatHighlight icon={<Github className="w-5 h-5" />} label="Repositórios" value="15+" color="violet" />
+                <StatHighlight icon={<Brain className="w-5 h-5" />} label="Pesquisa Operacional" value="Bolsista PRH-25 ANP" color="primary" />
+                <StatHighlight icon={<Rocket className="w-5 h-5" />} label="Centelha Sebrae RN • nota máxima" value="Opt.en Solutions" color="amber" />
+                <StatHighlight icon={<Briefcase className="w-5 h-5" />} label="Governo do RN • Diário Oficial" value="Grupo de Trabalho" color="emerald" />
+                <StatHighlight icon={<Code className="w-5 h-5" />} label="Linguagens e tecnologias" value="7 linguagens" color="violet" />
               </div>
             </motion.div>
 
@@ -160,10 +160,10 @@ export function About() {
               </h3>
               <div className="space-y-3">
                 {[
-                  'LLMs & RAG para aplicações empresariais',
-                  'Otimização logística com IoT',
-                  'Arquitetura de microsserviços',
-                  'DevOps & CI/CD avançado',
+                  'Otimização de rotas (VRP e CVRPTW) com Google OR-Tools',
+                  'MVP da Opt.en Solutions e parcerias com empresas de energia solar',
+                  'Sistema do Diário Oficial do RN (GT GAC/SEPLAN)',
+                  'Machine Learning aplicado à análise de dados',
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -184,26 +184,24 @@ export function About() {
             <motion.div className="card" whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} initial={{ opacity: 0, y: 20 }}>
               <h3 className="text-xl font-semibold text-dark-900 dark:text-dark-50 mb-4 flex items-center gap-2">
                 <Zap className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                Curiosidades
+                Projetos de Extensão e Pesquisa
               </h3>
               <div className="space-y-3">
-                {[
-                  'Desenvolvi um rover controlado via MQTT',
-                  'Implementei chatbot RAG para regulamento da UFRN',
-                  'Pesquisa em ML aplicado a ciência de materiais',
-                  'Experiência com VHDL/FPGA para sistemas digitais',
-                ].map((fact, index) => (
-                  <motion.div
-                    key={index}
-                    className="flex items-start gap-3 text-sm text-dark-600 dark:text-dark-300"
+                {participations.map((item, index) => (
+                  <motion.a
+                    key={item.short}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between gap-3 p-3 rounded-lg bg-dark-50 dark:bg-dark-800/50 text-sm text-dark-600 dark:text-dark-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <span className="text-primary-500 mt-1">→</span>
-                    <span>{fact}</span>
-                  </motion.div>
+                    <span>{item.name}</span>
+                    <ExternalLink className="w-4 h-4 flex-shrink-0" />
+                  </motion.a>
                 ))}
               </div>
             </motion.div>

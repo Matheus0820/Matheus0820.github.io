@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Rocket, Target, Zap, BarChart, GitBranch, Server, Cpu, Database, Cloud, Wifi, Shield, CheckCircle } from 'lucide-react';
+import { Rocket, Brain, Target, Zap, BarChart, GitBranch, Server, Cpu, Cloud, CheckCircle, TrendingDown, TrendingUp, Leaf } from 'lucide-react';
 import { startupInfo } from '../data/portfolio';
 
 export function Startup() {
@@ -26,14 +26,12 @@ export function Startup() {
   };
 
   const techIcons: Record<string, React.ReactNode> = {
-    React: <Server className="w-5 h-5" />,
-    TypeScript: <Cpu className="w-5 h-5" />,
-    Node.js: <Database className="w-5 h-5" />,
     Python: <Brain className="w-5 h-5" />,
-    PostgreSQL: <Database className="w-5 h-5" />,
-    MQTT: <Wifi className="w-5 h-5" />,
-    Docker: <GitBranch className="w-5 h-5" />,
-    AWS: <Cloud className="w-5 h-5" />,
+    "Google OR-Tools": <Cpu className="w-5 h-5" />,
+    "VRP / CVRPTW": <GitBranch className="w-5 h-5" />,
+    "Machine Learning": <Brain className="w-5 h-5" />,
+    APIs: <Server className="w-5 h-5" />,
+    Vercel: <Cloud className="w-5 h-5" />,
   };
 
   return (
@@ -64,7 +62,7 @@ export function Startup() {
             <Rocket className="w-4 h-4" />
             Startup
           </span>
-          <h2 className="section-title">Opten Solutions</h2>
+          <h2 className="section-title">Opt.en Solutions</h2>
           <p className="section-subtitle mt-4 mx-auto text-2xl font-medium gradient-text">{startupInfo.tagline}</p>
         </motion.div>
 
@@ -105,12 +103,13 @@ export function Startup() {
               </h3>
               <div className="space-y-3 text-dark-600 dark:text-dark-300">
                 <p className="leading-relaxed">
-                  A Opten Solutions nasceu dentro do <strong className="text-dark-900 dark:text-dark-50">Programa de Recursos Humanos PRH-25</strong> da
+                  A Opt.en Solutions nasceu dentro do <strong className="text-dark-900 dark:text-dark-50">Programa de Recursos Humanos PRH-25</strong> da
                   <strong className="text-dark-900 dark:text-dark-50">Agência Nacional do Petróleo (ANP)</strong>, na Universidade Federal do Rio Grande do Norte (UFRN).
                 </p>
                 <p className="leading-relaxed">
-                  O programa fomenta pesquisa e inovação tecnológica para o setor de óleo e gás, conectando academia e indústria.
-                  Nossa startup surgiu da necessidade de modernizar a gestão de ativos e frotas no setor energético.
+                  O programa, intitulado <em>Tecnologia e Inovação para Transição Energética Sustentável na Margem Equatorial Brasileira</em>,
+                  fomenta pesquisa e inovação conectando academia e setor energético. A startup surgiu para levar ao mercado os algoritmos
+                  de roteirização desenvolvidos na pesquisa, enfrentando a ineficiência logística que eleva custos e emissões.
                 </p>
               </div>
             </motion.div>
@@ -184,16 +183,16 @@ export function Startup() {
             <motion.div className="card" whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} initial={{ opacity: 0, y: 20 }}>
               <h3 className="text-xl font-semibold text-dark-900 dark:text-dark-50 mb-6 flex items-center gap-2">
                 <BarChart className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                Destaques da Arquitetura
+                Abordagem Técnica
               </h3>
               <div className="space-y-4">
                 {[
-                  { icon: Server, title: 'Frontend React', desc: 'TypeScript, Tailwind, Framer Motion, PWA' },
-                  { icon: Database, title: 'Backend Node.js', desc: 'API REST, JWT, PostgreSQL, Prisma ORM' },
-                  { icon: Cpu, title: 'ML & Analytics', desc: 'Python, Otimização de rotas, Previsão de demanda' },
-                  { icon: Wifi, title: 'IoT & Telemetria', desc: 'MQTT, Sensores industriais, Edge computing' },
-                  { icon: Shield, title: 'Segurança', desc: 'Auth0, Rate limiting, Criptografia, LGPD' },
-                  { icon: Cloud, title: 'Cloud & DevOps', desc: 'Vercel, Docker, CI/CD, Monitoramento' },
+                  { icon: GitBranch, title: 'Roteamento de Veículos (VRP)', desc: 'Evolução progressiva do VRP clássico até o CVRPTW, com restrições de capacidade e janelas de tempo' },
+                  { icon: Cpu, title: 'Google OR-Tools', desc: 'Solvers de alto desempenho para modelagem e solução dos problemas de roteirização' },
+                  { icon: BarChart, title: 'Cenários diário, semanal e mensal', desc: 'Lógica iterativa de arranjos de atendimento que minimiza a função objetivo global respeitando o tempo limite de cada cliente' },
+                  { icon: Server, title: 'Workforce Scheduling & Routing', desc: 'Roteirização considerando a especialização técnica dos funcionários (WSRP)' },
+                  { icon: Cloud, title: 'Plataforma Web', desc: 'API e biblioteca OR-Tools deram origem ao primeiro modelo da plataforma; site oficial na Vercel' },
+                  { icon: Zap, title: 'Validação em campo', desc: 'Testes operacionais com micro e pequenas empresas de energia solar fotovoltaica para refinar o MVP' },
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -224,10 +223,10 @@ export function Startup() {
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { label: 'Redução de Custos', value: '15-25%', icon: BarChart },
-                  { label: 'Eficiência Operacional', value: '30%+', icon: Zap },
-                  { label: 'Tempo de Resposta', value: '< 2s', icon: Cpu },
-                  { label: 'Disponibilidade', value: '99.9%', icon: Shield },
+                  { label: 'Ambiente corporativo', value: 'Menos custos', icon: TrendingDown },
+                  { label: 'Ambiente corporativo', value: 'Mais margem', icon: TrendingUp },
+                  { label: 'Frotas e sociedade', value: 'Menos CO₂', icon: Leaf },
+                  { label: 'Serviços prestados', value: 'Mais qualidade', icon: Target },
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -238,7 +237,7 @@ export function Startup() {
                     transition={{ delay: index * 0.1 }}
                   >
                     <item.icon className="w-6 h-6 mx-auto mb-2 text-primary-600 dark:text-primary-400" />
-                    <p className="text-2xl font-bold gradient-text">{item.value}</p>
+                    <p className="text-lg font-bold gradient-text">{item.value}</p>
                     <p className="text-xs text-dark-500 dark:text-dark-400">{item.label}</p>
                   </motion.div>
                 ))}

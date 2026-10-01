@@ -26,7 +26,7 @@ export function Projects() {
     },
   };
 
-  const filterOptions = ['Todos', 'Destaque', 'Backend', 'Frontend', 'ML/IoT', 'Pesquisa'];
+  const filterOptions = ['Todos', 'Destaque', 'Backend', 'Frontend', 'ML/Otimização', 'Pesquisa'];
   const [activeFilter, setActiveFilter] = useState('Todos');
 
   const filteredProjects = featuredProjects.filter((project) => {
@@ -34,7 +34,7 @@ export function Projects() {
     if (activeFilter === 'Destaque') return project.featured;
     if (activeFilter === 'Backend') return ['JavaScript', 'TypeScript', 'Go', 'Python'].includes(project.language) && !project.topics.includes('frontend');
     if (activeFilter === 'Frontend') return project.topics.includes('frontend') || project.topics.includes('react');
-    if (activeFilter === 'ML/IoT') return project.topics.some(t => ['ml', 'machine-learning', 'iot', 'mqtt', 'rag', 'llm'].includes(t.toLowerCase()));
+    if (activeFilter === 'ML/Otimização') return project.topics.some(t => ['ml', 'machine-learning', 'optimization', 'routing', 'rag', 'llm'].includes(t.toLowerCase()));
     if (activeFilter === 'Pesquisa') return project.topics.includes('research') || project.language === 'Jupyter Notebook' || project.language === 'VHDL';
     return true;
   });
@@ -71,7 +71,7 @@ export function Projects() {
           </span>
           <h2 className="section-title">Meus Repositórios Principais</h2>
           <p className="section-subtitle mt-4 mx-auto">
-            Seleção dos projetos mais relevantes no GitHub, abrangendo full-stack, ML, IoT e pesquisa acadêmica
+            Seleção dos projetos mais relevantes no GitHub, abrangendo full-stack, ML, otimização de rotas e pesquisa acadêmica
           </p>
         </motion.div>
 
@@ -216,7 +216,7 @@ function ProjectCard({ project, index, languageColors }: { project: Project; ind
             <motion.span
               key={topic}
               className="px-2 py-1 text-xs rounded-full bg-dark-100 dark:bg-dark-800 text-dark-600 dark:text-dark-300 border border-dark-200 dark:border-dark-700"
-              whileHover={{ backgroundColor: 'rgba(14, 165, 233, 0.1)', textColor: '#0ea5e9' }}
+              whileHover={{ backgroundColor: 'rgba(14, 165, 233, 0.1)', color: '#0ea5e9' }}
             >
               {topic}
             </motion.span>
