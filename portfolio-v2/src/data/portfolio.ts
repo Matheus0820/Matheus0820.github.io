@@ -25,6 +25,24 @@ export interface Participation {
   url: string;
 }
 
+export interface SocialLink {
+  name: string;
+  url: string;
+  icon: string;
+}
+
+export interface Fact {
+  label: string;
+  value: string;
+}
+
+export interface Publication {
+  title: string;
+  authors: string;
+  venue: string;
+  kind: string;
+}
+
 export const personalInfo = {
   name: "Matheus Ramos",
   fullName: "Matheus Ramos Ferreira da Silva",
@@ -167,7 +185,6 @@ export const skills: Skill[] = [
   { name: "Gerenciamento Ágil", category: "concept" },
 ];
 
-// Projetos de extensão e pesquisa dos quais participo/participei
 export const participations: Participation[] = [
   { name: "Observatório de Valores do Nordeste", short: "OVNE", url: "https://ovne.ect.ufrn.br" },
   { name: "Caravana Espacial", short: "Caravana Espacial", url: "https://caravanaespacial.ect.ufrn.br" },
@@ -175,32 +192,32 @@ export const participations: Participation[] = [
   { name: "Um Robô por Aluno", short: "URA", url: "https://www.umroboporaluno.org" },
 ];
 
-export const socialLinks = [
+export const socialLinks: SocialLink[] = [
   { name: "GitHub", url: "https://github.com/Matheus0820", icon: "github" },
   { name: "Currículo Lattes", url: "http://lattes.cnpq.br/3863511228005347", icon: "book" },
   { name: "Email", url: "mailto:mr7052954@gmail.com", icon: "mail" },
 ];
 
-export const about = [
+export const about: string[] = [
   "Curso Bacharelado em Ciências e Tecnologia, com ênfase em Tecnologia da Computação, na ECT/UFRN. Desde 2023 trabalho com desenvolvimento web, principalmente com Python e Django, em projetos da universidade e da RNP.",
   "Como bolsista do PRH-25 da ANP, desenvolvo algoritmos de otimização e roteirização de veículos com Google OR-Tools. Dessa pesquisa nasceu a Opt.en Solutions, startup que fundei, e um resumo nos anais da IX Semana de Ciências e Tecnologia da UFRN.",
   "Também integro o grupo de trabalho do Governo do RN que desenvolve o novo sistema do Diário Oficial do Estado.",
 ];
 
-export const facts = [
+export const facts: Fact[] = [
   { label: "Localização", value: "Natal, RN - Brasil" },
   { label: "Formação", value: "Bacharelado em Ciências e Tecnologia (Tecnologia da Computação), UFRN, 6º período" },
   { label: "Atuação", value: "Bolsista PRH-25 da ANP e membro do Grupo de Trabalho do Diário Oficial do RN" },
 ];
 
-export const currentFocus = [
+export const currentFocus: string[] = [
   "Otimização de rotas (VRP e CVRPTW) com Google OR-Tools",
   "MVP da Opt.en Solutions e parcerias com empresas de energia solar",
   "Sistema do Diário Oficial do RN (GT GAC/SEPLAN)",
   "Machine Learning aplicado à análise de dados",
 ];
 
-export const publication = {
+export const publication: Publication = {
   title: "Rotas sustentáveis para a transição energética: desenvolvimento de algoritmos e da modelagem de negócios da Opt.en",
   authors: "Ramos, M.; Carvalho, Z.; Santi, É.",
   venue: "IX Semana de Ciências e Tecnologia da UFRN",

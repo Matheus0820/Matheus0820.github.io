@@ -29,13 +29,14 @@ export function Projects() {
   const filterOptions = ['Todos', 'Destaque', 'Backend', 'Frontend', 'ML/Otimização', 'Pesquisa'];
   const [activeFilter, setActiveFilter] = useState('Todos');
 
-  const filteredProjects = featuredProjects.filter((project) => {
+  const filteredProjects = featuredProjects.filter((project: Project) => {
+    const topics = project.topics || [];
     if (activeFilter === 'Todos') return true;
     if (activeFilter === 'Destaque') return project.featured;
-    if (activeFilter === 'Backend') return ['JavaScript', 'TypeScript', 'Go', 'Python'].includes(project.language) && !project.topics.includes('frontend');
-    if (activeFilter === 'Frontend') return project.topics.includes('frontend') || project.topics.includes('react');
-    if (activeFilter === 'ML/Otimização') return project.topics.some(t => ['ml', 'machine-learning', 'optimization', 'routing', 'rag', 'llm'].includes(t.toLowerCase()));
-    if (activeFilter === 'Pesquisa') return project.topics.includes('research') || project.language === 'Jupyter Notebook' || project.language === 'VHDL';
+    if (activeFilter === 'Backend') return ['JavaScript', 'TypeScript', 'Go', 'Python'].includes(project.language) && !topics.includes('frontend');
+    if (activeFilter === 'Frontend') return topics.includes('frontend') || topics.includes('react');
+    if (activeFilter === 'ML/Otimização') return topics.some((t: string) => ['ml', 'machine-learning', 'optimization', 'routing', 'rag', 'llm'].includes(t.toLowerCase()));
+    if (activeFilter === 'Pesquisa') return topics.includes('research') || project.language === 'Jupyter Notebook' || project.language === 'VHDL';
     return true;
   });
 
@@ -80,7 +81,7 @@ export function Projects() {
           variants={itemVariants}
           className="flex flex-wrap justify-center gap-2 mb-12"
         >
-          {filterOptions.map((filter) => (
+          {filterOptions.map((filter: string) => (
             <motion.button
               key={filter}
               onClick={() => setActiveFilter(filter)}
@@ -103,7 +104,7 @@ export function Projects() {
           role="list"
           aria-label="Lista de projetos"
         >
-          {filteredProjects.map((project, index) => (
+          {filteredProjects.map((project: Project, index: number) => (
             <ProjectCard
               key={project.name}
               project={project}
@@ -148,6 +149,8 @@ function ProjectCard({ project, index, languageColors }: { project: Project; ind
     },
   };
 
+  const topics = project.topics || [];
+
   return (
     <motion.article
       variants={cardVariants}
@@ -156,7 +159,7 @@ function ProjectCard({ project, index, languageColors }: { project: Project; ind
       viewport={{ once: true, margin: '-50px' }}
       whileHover={{ y: -8, boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.15)' }}
       transition={{ duration: 0.3 }}
-      className="card relative overflow-hidden group"
+      className="card relative overflow-hidden group border border-dark-200 dark:border-dark-700 rounded-xl bg-white dark:bg-dark-900"
     >
       {/* Featured Badge */}
       {project.featured && (
@@ -166,29 +169,29 @@ function ProjectCard({ project, index, languageColors }: { project: Project; ind
           animate={{ scale: 1, rotate: 0 }}
           transition={{ delay: 0.3, type: 'spring', stiffness: 260, damping: 20 }}
         >
-          <span className="px-2 py-1 rounded-full bg-amber-500 text-white text-xs font-bold flex items-center gap-1">
-            <Star className="w-3 h-3" />
+          <span className="px-2.5 py-1 rounded-full bg-amber-500 text-white text-xs font-bold flex items-center gap-1 shadow-md">
+            <Star className="w-3 h-3 fill-current" />
             Destaque
           </span>
         </motion.div>
       )}
 
-      <div className="h-32 bg-gradient-to-br from-primary-500/10 to-primary-600/20 dark:from-primary-900/30 dark:to-primary-800/30 relative overflow-hidden">
+      {/* Banner Topo */}
+      <div className="h-28 bg-gradient-to-br from-primary-500/10 to-primary-600/20 dark:from-primary-900/30 dark:to-primary-800/30 relative overflow-hidden p-3 flex items-end">
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-primary-500/5 to-primary-500/10" />
-        {project.topics.slice(0, 3).map((topic, i) => (
-          <motion.span
-            key={topic}
-            className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1"
-            style={{ bottom: `3px`, left: `3px` }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 + i * 0.1 }}
-          >
-            <span className="px-2 py-0.5 text-xs rounded bg-white/80 dark:bg-dark-900/80 backdrop-blur text-dark-700 dark:text-dark-300">
+        <div className="relative z-10 flex flex-wrap gap-1">
+          {topics.slice(0, 3).map((topic: string, i: number) => (
+            <motion.span
+              key={`top-${topic}-${i}`}
+              className="px-2 py-0.5 text-xs rounded bg-white/80 dark:bg-dark-900/80 backdrop-blur text-dark-700 dark:text-dark-300 font-medium"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 + i * 0.1 }}
+            >
               {topic}
-            </span>
-          </motion.span>
-        ))}
+            </motion.span>
+          ))}
+        </div>
       </div>
 
       <div className="p-6 space-y-4">
@@ -196,40 +199,40 @@ function ProjectCard({ project, index, languageColors }: { project: Project; ind
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-2">
               <Code className="w-4 h-4 text-primary-500 flex-shrink-0" />
-              <span className={`text-xs font-medium px-2 py-1 rounded ${languageColors[project.language] || 'bg-dark-100 dark:bg-dark-800 text-dark-600 dark:text-dark-300'}`}>
+              <span className={`text-xs font-medium px-2 py-0.5 rounded ${languageColors[project.language] || 'bg-dark-100 dark:bg-dark-800 text-dark-600 dark:text-dark-300'}`}>
                 {project.language}
               </span>
             </div>
-            <h3 className="text-xl font-bold text-dark-900 dark:text-dark-50 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+            <h3 className="text-xl font-bold text-dark-900 dark:text-dark-50 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors truncate">
               {project.name}
             </h3>
           </div>
         </div>
 
-        <p className="text-dark-600 dark:text-dark-300 leading-relaxed line-clamp-3">
+        <p className="text-dark-600 dark:text-dark-300 text-sm leading-relaxed line-clamp-3">
           {project.description}
         </p>
 
-        {/* Topics */}
-        <div className="flex flex-wrap gap-2">
-          {project.topics.slice(0, 5).map((topic) => (
+        {/* Topics List */}
+        <div className="flex flex-wrap gap-1.5 pt-2">
+          {topics.slice(0, 5).map((topic: string) => (
             <motion.span
-              key={topic}
-              className="px-2 py-1 text-xs rounded-full bg-dark-100 dark:bg-dark-800 text-dark-600 dark:text-dark-300 border border-dark-200 dark:border-dark-700"
+              key={`list-${topic}`}
+              className="px-2 py-0.5 text-xs rounded-full bg-dark-100 dark:bg-dark-800 text-dark-600 dark:text-dark-300 border border-dark-200 dark:border-dark-700"
               whileHover={{ backgroundColor: 'rgba(14, 165, 233, 0.1)', color: '#0ea5e9' }}
             >
               {topic}
             </motion.span>
           ))}
-          {project.topics.length > 5 && (
-            <span className="px-2 py-1 text-xs rounded-full bg-dark-100 dark:bg-dark-800 text-dark-500 dark:text-dark-400 border border-dark-200 dark:border-dark-700">
-              +{project.topics.length - 5}
+          {topics.length > 5 && (
+            <span className="px-2 py-0.5 text-xs rounded-full bg-dark-100 dark:bg-dark-800 text-dark-500 dark:text-dark-400 border border-dark-200 dark:border-dark-700">
+              +{topics.length - 5}
             </span>
           )}
         </div>
 
         {/* Links */}
-        <div className="flex items-center gap-3 pt-2 border-t border-dark-200 dark:border-dark-700">
+        <div className="flex items-center gap-3 pt-3 border-t border-dark-200 dark:border-dark-700">
           <motion.a
             href={project.url}
             target="_blank"

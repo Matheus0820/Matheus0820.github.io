@@ -2,6 +2,12 @@ import { motion } from 'framer-motion';
 import { Rocket, Brain, Target, Zap, BarChart, GitBranch, Server, Cpu, Cloud, CheckCircle, TrendingDown, TrendingUp, Leaf } from 'lucide-react';
 import { startupInfo } from '../data/portfolio';
 
+// Tipagem para os itens de estatística
+interface StatItem {
+  label: string;
+  value: string;
+}
+
 export function Startup() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -33,6 +39,11 @@ export function Startup() {
     APIs: <Server className="w-5 h-5" />,
     Vercel: <Cloud className="w-5 h-5" />,
   };
+
+  // Suporte flexível para compatibilidade com a propriedade no arquivo de dados
+  const technologiesList: string[] = startupInfo.technologies || startupInfo.techStack || [];
+  const achievementsList: string[] = startupInfo.achievements || [];
+  const statsList: StatItem[] = startupInfo.stats || [];
 
   return (
     <section id="startup" className="section relative overflow-hidden bg-gradient-to-b from-primary-50/50 via-white to-transparent dark:from-primary-900/10 dark:via-dark-950 dark:to-dark-950">
@@ -71,8 +82,8 @@ export function Startup() {
           <motion.div variants={itemVariants} className="space-y-8">
             <motion.div className="card gradient-border" whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} initial={{ opacity: 0, y: 20 }}>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white text-2xl">
-                  {startupInfo.logo}
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white text-2xl font-bold">
+                  {startupInfo.logo || 'O'}
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-dark-900 dark:text-dark-50">{startupInfo.name}</h3>
@@ -82,17 +93,19 @@ export function Startup() {
               <p className="text-dark-600 dark:text-dark-300 leading-relaxed mb-6">
                 {startupInfo.description}
               </p>
-              <motion.a
-                href={startupInfo.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary inline-flex items-center gap-2"
-                whileHover={{ scale: 1.02, x: 4 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Visitar Site
-                <Rocket className="w-4 h-4" />
-              </motion.a>
+              {startupInfo.website && (
+                <motion.a
+                  href={startupInfo.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary inline-flex items-center gap-2"
+                  whileHover={{ scale: 1.02, x: 4 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Visitar Site
+                  <Rocket className="w-4 h-4" />
+                </motion.a>
+              )}
             </motion.div>
 
             {/* Origin Story */}
@@ -103,7 +116,7 @@ export function Startup() {
               </h3>
               <div className="space-y-3 text-dark-600 dark:text-dark-300">
                 <p className="leading-relaxed">
-                  A Opt.en Solutions nasceu dentro do <strong className="text-dark-900 dark:text-dark-50">Programa de Recursos Humanos PRH-25</strong> da
+                  A Opt.en Solutions nasceu dentro do <strong className="text-dark-900 dark:text-dark-50">Programa de Recursos Humanos PRH-25</strong> da{' '}
                   <strong className="text-dark-900 dark:text-dark-50">Agência Nacional do Petróleo (ANP)</strong>, na Universidade Federal do Rio Grande do Norte (UFRN).
                 </p>
                 <p className="leading-relaxed">
@@ -121,9 +134,9 @@ export function Startup() {
                 Conquistas & Marcos
               </h3>
               <div className="space-y-3">
-                {startupInfo.achievements.map((achievement, index) => (
+                {achievementsList.map((achievement: string, index: number) => (
                   <motion.div
-                    key={index}
+                    key={`achievement-${index}`}
                     className="flex items-center gap-3 p-3 rounded-lg bg-dark-50 dark:bg-dark-800/50"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -139,9 +152,9 @@ export function Startup() {
 
             {/* Stats */}
             <motion.div className="grid grid-cols-2 gap-4" whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} initial={{ opacity: 0, y: 20 }}>
-              {startupInfo.stats.map((stat, index) => (
+              {statsList.map((stat: StatItem, index: number) => (
                 <motion.div
-                  key={index}
+                  key={`stat-${index}`}
                   className="card text-center"
                   whileHover={{ y: -4 }}
                   transition={{ delay: index * 0.1 }}
@@ -162,15 +175,15 @@ export function Startup() {
                 Stack Tecnológico
               </h3>
               <div className="flex flex-wrap gap-3">
-                {startupInfo.technologies.map((tech) => (
+                {technologiesList.map((tech: string, index: number) => (
                   <motion.div
-                    key={tech}
+                    key={`tech-${tech}-${index}`}
                     className="flex items-center gap-2 px-4 py-2 rounded-lg bg-dark-50 dark:bg-dark-800/50 border border-dark-200 dark:border-dark-700"
                     whileHover={{ scale: 1.02, y: -2 }}
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: startupInfo.technologies.indexOf(tech) * 0.05 }}
+                    transition={{ delay: index * 0.05 }}
                   >
                     {techIcons[tech] || <Zap className="w-4 h-4 text-primary-500" />}
                     <span className="text-sm font-medium text-dark-900 dark:text-dark-50">{tech}</span>
@@ -193,9 +206,9 @@ export function Startup() {
                   { icon: Server, title: 'Workforce Scheduling & Routing', desc: 'Roteirização considerando a especialização técnica dos funcionários (WSRP)' },
                   { icon: Cloud, title: 'Plataforma Web', desc: 'API e biblioteca OR-Tools deram origem ao primeiro modelo da plataforma; site oficial na Vercel' },
                   { icon: Zap, title: 'Validação em campo', desc: 'Testes operacionais com micro e pequenas empresas de energia solar fotovoltaica para refinar o MVP' },
-                ].map((item, index) => (
+                ].map((item, index: number) => (
                   <motion.div
-                    key={index}
+                    key={`arch-${index}`}
                     className="flex gap-4 p-4 rounded-lg bg-dark-50 dark:bg-dark-800/50 border border-dark-200 dark:border-dark-700"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -227,9 +240,9 @@ export function Startup() {
                   { label: 'Ambiente corporativo', value: 'Mais margem', icon: TrendingUp },
                   { label: 'Frotas e sociedade', value: 'Menos CO₂', icon: Leaf },
                   { label: 'Serviços prestados', value: 'Mais qualidade', icon: Target },
-                ].map((item, index) => (
+                ].map((item, index: number) => (
                   <motion.div
-                    key={index}
+                    key={`impact-${index}`}
                     className="text-center p-4 rounded-lg bg-dark-50 dark:bg-dark-800/50"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
