@@ -1,13 +1,3 @@
-export interface Project {
-  name: string;
-  description: string;
-  language: string;
-  url: string;
-  homepage?: string;
-  topics: string[];
-  featured: boolean;
-}
-
 export interface Skill {
   name: string;
   category: 'language' | 'framework' | 'tool' | 'concept';
@@ -44,8 +34,7 @@ export const personalInfo = {
   github: "https://github.com/Matheus0820",
   lattes: "http://lattes.cnpq.br/3863511228005347",
   location: "Natal, RN - Brasil",
-  bio: "Programador Full Stack e Pesquisador Operacional, cursando Bacharelado em Ciências e Tecnologia (ênfase em Tecnologia da Computação) na ECT/UFRN. Desenvolvo aplicações web com Python e Django e, como bolsista do PRH-25 da ANP, crio algoritmos de otimização e roteirização com Google OR-Tools. Sou fundador da Opt.en Solutions, startup nascida dessa pesquisa, e integro o grupo de trabalho do Governo do RN responsável pelo novo sistema do Diário Oficial do Estado.",
-  avatar: "https://avatars.githubusercontent.com/u/89211913?v=4",
+  intro: "Estudo Ciências e Tecnologia na UFRN, desenvolvo aplicações web com Python e Django e pesquiso otimização de rotas com Google OR-Tools como bolsista do PRH-25 da ANP.",
 };
 
 export const education: Education[] = [
@@ -178,83 +167,6 @@ export const skills: Skill[] = [
   { name: "Gerenciamento Ágil", category: "concept" },
 ];
 
-export const featuredProjects: Project[] = [
-  {
-    name: "portfolio_rallyne_frontend",
-    description: "Front-end do site de portfólio de Rallyne Silva Fotografia: galeria de ensaios, casamentos e eventos registrados com luz natural. Publicado na Vercel.",
-    language: "TypeScript",
-    url: "https://github.com/Matheus0820/portfolio_rallyne_frontend",
-    homepage: "https://rallynefotografia.vercel.app/",
-    topics: ["frontend", "typescript", "fotografia", "portfolio", "vercel"],
-    featured: true,
-  },
-  {
-    name: "portfolio_rallyne_backend",
-    description: "Back-end do site Rallyne Silva Fotografia: API que alimenta o portfólio fotográfico, integrada ao front-end e publicada na Vercel.",
-    language: "JavaScript",
-    url: "https://github.com/Matheus0820/portfolio_rallyne_backend",
-    homepage: "https://rallynefotografia.vercel.app/",
-    topics: ["backend", "nodejs", "api", "fotografia", "vercel"],
-    featured: true,
-  },
-  {
-    name: "OptenFleetAPI",
-    description: "API da plataforma da Opt.en Solutions, startup nascida da pesquisa do PRH-25 da ANP, voltada à gestão de frotas e à otimização de rotas.",
-    language: "JavaScript",
-    url: "https://github.com/Matheus0820/OptenFleetAPI",
-    topics: ["fleet-management", "optimization", "routing", "anp", "prh-25"],
-    featured: true,
-  },
-  {
-    name: "ChatBot-RAG-Regulamento-ECT-UFRN",
-    description: "Chatbot inteligente com RAG (Retrieval-Augmented Generation) para consultas ao regulamento da ECT/UFRN. Utiliza LangChain, embeddings vetoriais e LLMs para respostas precisas.",
-    language: "Python",
-    url: "https://github.com/Matheus0820/ChatBot-RAG-Regulamento-ECT-UFRN",
-    topics: ["rag", "llm", "langchain", "chatbot", "embeddings", "vector-db", "ufrn"],
-    featured: true,
-  },
-  {
-    name: "Algoritmos-e-Estrutura-de-Dados-1",
-    description: "Implementações de algoritmos clássicos e estruturas de dados em Go. Inclui ordenação, busca, grafos, árvores e programação dinâmica.",
-    language: "Go",
-    url: "https://github.com/Matheus0820/Algoritmos-e-Estrutura-de-Dados-1",
-    topics: ["algorithms", "data-structures", "go", "golang", "competitive-programming"],
-    featured: true,
-  },
-  {
-    name: "Sistemas-Digitais",
-    description: "Projetos de sistemas digitais em VHDL para FPGA. Inclui processadores, memórias, controladores e circuitos sequenciais/combinacionais.",
-    language: "VHDL",
-    url: "https://github.com/Matheus0820/Sistemas-Digitais",
-    topics: ["vhdl", "fpga", "digital-design", "hardware", "processor", "quartus"],
-    featured: true,
-  },
-  {
-    name: "pesquisa_machine_leaning_e_materiais",
-    description: "Pesquisa em Machine Learning aplicado a ciência de materiais. Notebooks com experimentos, pré-processamento, treinamento e avaliação de modelos.",
-    language: "Jupyter Notebook",
-    url: "https://github.com/Matheus0820/pesquisa_machine_leaning_e_materiais",
-    topics: ["machine-learning", "materials-science", "jupyter", "python", "research", "pytorch"],
-    featured: true,
-  },
-  {
-    name: "Desenvolvimento-WEB-Backend",
-    description: "Projetos de desenvolvimento web backend com Node.js, Express, bancos de dados relacionais e não-relacionais, autenticação e deploy.",
-    language: "JavaScript",
-    url: "https://github.com/Matheus0820/Desenvolvimento-WEB-Backend",
-    topics: ["nodejs", "express", "backend", "database", "api", "web-development"],
-    featured: false,
-  },
-  {
-    name: "Sinais-e-Sistemas",
-    description: "Análise de sinais e sistemas com Python/Jupyter. Transformadas de Fourier, Laplace, Z, filtros digitais e processamento de sinais.",
-    language: "Jupyter Notebook",
-    url: "https://github.com/Matheus0820/Sinais-e-Sistemas",
-    topics: ["signals", "systems", "fourier", "laplace", "dsp", "jupyter", "python"],
-    featured: false,
-  },
-];
-
 // Projetos de extensão e pesquisa dos quais participo/participei
 export const participations: Participation[] = [
   { name: "Observatório de Valores do Nordeste", short: "OVNE", url: "https://ovne.ect.ufrn.br" },
@@ -267,28 +179,30 @@ export const socialLinks = [
   { name: "GitHub", url: "https://github.com/Matheus0820", icon: "github" },
   { name: "Currículo Lattes", url: "http://lattes.cnpq.br/3863511228005347", icon: "book" },
   { name: "Email", url: "mailto:mr7052954@gmail.com", icon: "mail" },
-  { name: "Opt.en Solutions", url: "https://optensolutions.vercel.app/", icon: "globe" },
 ];
 
-export const startupInfo = {
-  name: "Opt.en Solutions",
-  tagline: "Rotas Sustentáveis para a Transição Energética",
-  description: "A Opt.en Solutions é uma startup (regime Inova Simples) que nasceu da pesquisa do PRH-25 da ANP na UFRN. Desenvolvemos algoritmos de otimização e roteirização para o setor de energia, começando por micro e pequenas empresas de instalação e manutenção de painéis solares, para reduzir custos, diminuir as emissões de carbono das frotas e melhorar a qualidade do serviço.",
-  website: "https://optensolutions.vercel.app/",
-  logo: "🚀",
-  stats: [
-    { label: "Programa", value: "PRH-25 ANP" },
-    { label: "Instituição", value: "UFRN" },
-    { label: "Regime", value: "Inova Simples" },
-    { label: "Status", value: "MVP em Desenvolvimento" },
-  ],
-  technologies: ["Python", "Google OR-Tools", "VRP / CVRPTW", "Machine Learning", "APIs", "Vercel"],
-  achievements: [
-    "Aprovada com nota máxima na 1ª fase do Centelha Sebrae RN",
-    "Selecionada para o programa de aceleração SuperNova do Sebrae",
-    "Formalizada sob o regime Inova Simples",
-    "Site oficial lançado para atrair parcerias e divulgar a pesquisa",
-    "Protótipos de roteirização validados com Google OR-Tools",
-    "Resumo em anais da IX Semana de Ciências e Tecnologia da UFRN",
-  ],
+export const about = [
+  "Curso Bacharelado em Ciências e Tecnologia, com ênfase em Tecnologia da Computação, na ECT/UFRN. Desde 2023 trabalho com desenvolvimento web, principalmente com Python e Django, em projetos da universidade e da RNP.",
+  "Como bolsista do PRH-25 da ANP, desenvolvo algoritmos de otimização e roteirização de veículos com Google OR-Tools. Dessa pesquisa nasceu a Opt.en Solutions, startup que fundei, e um resumo nos anais da IX Semana de Ciências e Tecnologia da UFRN.",
+  "Também integro o grupo de trabalho do Governo do RN que desenvolve o novo sistema do Diário Oficial do Estado.",
+];
+
+export const facts = [
+  { label: "Localização", value: "Natal, RN - Brasil" },
+  { label: "Formação", value: "Bacharelado em Ciências e Tecnologia (Tecnologia da Computação), UFRN, 6º período" },
+  { label: "Atuação", value: "Bolsista PRH-25 da ANP e membro do Grupo de Trabalho do Diário Oficial do RN" },
+];
+
+export const currentFocus = [
+  "Otimização de rotas (VRP e CVRPTW) com Google OR-Tools",
+  "MVP da Opt.en Solutions e parcerias com empresas de energia solar",
+  "Sistema do Diário Oficial do RN (GT GAC/SEPLAN)",
+  "Machine Learning aplicado à análise de dados",
+];
+
+export const publication = {
+  title: "Rotas sustentáveis para a transição energética: desenvolvimento de algoritmos e da modelagem de negócios da Opt.en",
+  authors: "Ramos, M.; Carvalho, Z.; Santi, É.",
+  venue: "IX Semana de Ciências e Tecnologia da UFRN",
+  kind: "Resumo em anais",
 };

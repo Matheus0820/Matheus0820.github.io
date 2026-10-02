@@ -1,321 +1,109 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Github, BookOpen, Globe, MapPin, Send, MessageSquare, ExternalLink } from 'lucide-react';
+import { Mail, Github, BookOpen, MapPin, Send } from 'lucide-react';
 import { personalInfo } from '../data/portfolio';
 
 export function Contact() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-      },
-    },
-  };
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Sem servidor: o formulário monta a mensagem e abre o aplicativo de e-mail do visitante.
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('submitting');
-
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
-    setStatus('success');
-    setFormData({ name: '', email: '', subject: '', message: '' });
-
-    setTimeout(() => setStatus('idle'), 3000);
+    const body = `${form.message}\n\n${form.name}\n${form.email}`;
+    const params = new URLSearchParams({ subject: form.subject, body });
+    window.location.href = `mailto:${personalInfo.email}?${params.toString().replace(/\+/g, '%20')}`;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  const channels = [
+    { label: 'E-mail', value: personalInfo.email, href: `mailto:${personalInfo.email}`, icon: Mail },
+    { label: 'GitHub', value: '@Matheus0820', href: personalInfo.github, icon: Github },
+    { label: 'Currículo Lattes', value: 'Matheus Ramos', href: personalInfo.lattes, icon: BookOpen },
+  ];
 
   return (
-    <section id="contato" className="section relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-50/30 via-transparent to-transparent dark:from-primary-900/10" />
+    <section id="contato" className="section">
+      <div className="wrap section-grid">
+        <h2 className="section-title">Contato</h2>
 
-      {/* Animated orbs */}
-      <motion.div
-        className="absolute top-20 left-10 w-72 h-72 rounded-full bg-primary-500/10 blur-3xl"
-        animate={{ scale: [1, 1.1, 1], x: [0, 20, 0], y: [0, -20, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-primary-500/10 blur-3xl"
-        animate={{ scale: [1, 1.15, 1], x: [0, -30, 0], y: [0, 30, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
-      />
+        <div className="grid min-w-0 gap-12 md:grid-cols-2">
+          <div>
+            <p className="max-w-md">
+              Para oportunidades, colaborações ou conversas sobre tecnologia e pesquisa, escreva por e-mail ou use o formulário.
+            </p>
 
-      <motion.div
-        className="container-custom relative z-10"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-100px' }}
-      >
-        {/* Header */}
-        <motion.div
-          variants={itemVariants}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium mb-4">
-            <MessageSquare className="w-4 h-4 inline mr-1" />
-            Entre em Contato
-          </span>
-          <h2 className="section-title">Vamos conversar?</h2>
-          <p className="section-subtitle mt-4 mx-auto">
-            Estou sempre aberto a novas oportunidades, colaborações e conversas sobre tecnologia
-          </p>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <motion.div variants={itemVariants} className="space-y-8">
-            <motion.div className="card gradient-border" whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} initial={{ opacity: 0, y: 20 }}>
-              <h3 className="text-xl font-semibold text-dark-900 dark:text-dark-50 mb-6 flex items-center gap-2">
-                <Mail className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                Informações de Contato
-              </h3>
-              <div className="space-y-4">
-                <ContactItem
-                  icon={<Mail className="w-5 h-5" />}
-                  label="Email"
-                  value={personalInfo.email}
-                  href={`mailto:${personalInfo.email}`}
-                  description="Contato principal"
-                />
-                <ContactItem
-                  icon={<Github className="w-5 h-5" />}
-                  label="GitHub"
-                  value="@Matheus0820"
-                  href={personalInfo.github}
-                  description="Projetos e contribuições"
-                />
-                <ContactItem
-                  icon={<BookOpen className="w-5 h-5" />}
-                  label="Currículo Lattes"
-                  value="lattes.cnpq.br/3863511228005347"
-                  href={personalInfo.lattes}
-                  description="Produção acadêmica"
-                />
-                <ContactItem
-                  icon={<Globe className="w-5 h-5" />}
-                  label="Opt.en Solutions"
-                  value="optensolutions.vercel.app"
-                  href="https://optensolutions.vercel.app/"
-                  description="Minha startup (Inova Simples)"
-                />
-                <ContactItem
-                  icon={<MapPin className="w-5 h-5" />}
-                  label="Localização"
-                  value={personalInfo.location}
-                  description="Natal e região"
-                />
-              </div>
-            </motion.div>
-
-            {/* Availability */}
-            <motion.div className="card" whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} initial={{ opacity: 0, y: 20 }}>
-              <h3 className="text-xl font-semibold text-dark-900 dark:text-dark-50 mb-4 flex items-center gap-2">
-                <Send className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                Atuação e Interesses
-              </h3>
-              <div className="space-y-3">
-                {[
-                  { label: 'Atuação atual', value: 'Bolsista PRH-25 ANP • Fundador da Opt.en Solutions' },
-                  { label: 'Formação', value: 'Ciências e Tecnologia (Tecnologia da Computação) • UFRN' },
-                  { label: 'Interesses', value: 'Full Stack, Pesquisa Operacional, Otimização, Machine Learning' },
-                  { label: 'Parcerias', value: 'Empresas de instalação e manutenção de painéis solares' },
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    className="flex items-center gap-3 p-3 rounded-lg bg-dark-50 dark:bg-dark-800/50"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                    <div>
-                      <p className="text-sm font-medium text-dark-900 dark:text-dark-50">{item.label}</p>
-                      <p className="text-sm text-dark-500 dark:text-dark-400">{item.value}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div variants={itemVariants}>
-            <motion.form
-              onSubmit={handleSubmit}
-              className="card p-8"
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              initial={{ opacity: 0, y: 20 }}
-            >
-              <h3 className="text-xl font-semibold text-dark-900 dark:text-dark-50 mb-6 flex items-center gap-2">
-                <MessageSquare className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                Envie uma mensagem
-              </h3>
-
-              {status === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="mb-6 p-4 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 flex items-center gap-3"
-                >
-                  <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white flex-shrink-0">
-                    <Send className="w-5 h-5" />
+            <ul className="mt-8 space-y-5">
+              {channels.map(({ label, value, href, icon: Icon }) => (
+                <li key={label} className="flex items-start gap-3">
+                  <Icon className="mt-1 h-5 w-5 flex-shrink-0 text-primary-600 dark:text-primary-400" aria-hidden="true" />
+                  <div className="min-w-0">
+                    <p className="font-sans text-sm text-dark-500 dark:text-dark-400">{label}</p>
+                    <a
+                      href={href}
+                      target={href.startsWith('mailto:') ? undefined : '_blank'}
+                      rel="noopener noreferrer"
+                      className="text-link break-words"
+                    >
+                      {value}
+                    </a>
                   </div>
-                  <div>
-                    <p className="font-medium text-emerald-800 dark:text-emerald-200">Mensagem enviada!</p>
-                    <p className="text-sm text-emerald-700 dark:text-emerald-300">Entrarei em contato em breve.</p>
-                  </div>
-                </motion.div>
-              )}
-
-              <div className="space-y-4">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <FormField
-                    label="Nome"
-                    name="name"
-                    type="text"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Seu nome"
-                    required
-                    disabled={status === 'submitting'}
-                  />
-                  <FormField
-                    label="Email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="seu@email.com"
-                    required
-                    disabled={status === 'submitting'}
-                  />
+                </li>
+              ))}
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-primary-600 dark:text-primary-400" aria-hidden="true" />
+                <div>
+                  <p className="font-sans text-sm text-dark-500 dark:text-dark-400">Localização</p>
+                  <p>{personalInfo.location}</p>
                 </div>
+              </li>
+            </ul>
+          </div>
 
-                <FormField
-                  label="Assunto"
-                  name="subject"
-                  type="text"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  placeholder="Sobre o que gostaria de falar?"
-                  required
-                  disabled={status === 'submitting'}
-                />
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field label="Nome" name="name" value={form.name} onChange={handleChange} autoComplete="name" />
+              <Field label="E-mail" name="email" type="email" value={form.email} onChange={handleChange} autoComplete="email" />
+            </div>
+            <Field label="Assunto" name="subject" value={form.subject} onChange={handleChange} />
+            <Field label="Mensagem" name="message" value={form.message} onChange={handleChange} rows={5} />
 
-                <FormField
-                  label="Mensagem"
-                  name="message"
-                  type="textarea"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Conte mais detalhes..."
-                  required
-                  rows={5}
-                  disabled={status === 'submitting'}
-                />
-
-                <motion.button
-                  type="submit"
-                  disabled={status === 'submitting'}
-                  className="btn-primary w-full flex items-center justify-center gap-2"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  {status === 'submitting' ? (
-                    <>
-                      <motion.div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Enviando...
-                    </>
-                  ) : (
-                    <>
-                      Enviar Mensagem
-                      <Send className="w-4 h-4" />
-                    </>
-                  )}
-                </motion.button>
-              </div>
-            </motion.form>
-          </motion.div>
+            <button type="submit" className="btn-primary w-full sm:w-auto">
+              <Send className="h-4 w-4" aria-hidden="true" />
+              Abrir no meu e-mail
+            </button>
+            <p className="font-sans text-sm text-dark-500 dark:text-dark-400">
+              O formulário abre o seu aplicativo de e-mail com a mensagem pronta para enviar.
+            </p>
+          </form>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
 
-function ContactItem({ icon, label, value, href, description }: { icon: React.ReactNode; label: string; value: string; href?: string; description: string }) {
-  const Content = href ? 'a' : 'div';
-  return (
-    <Content
-      href={href}
-      target={href ? '_blank' : undefined}
-      rel={href ? 'noopener noreferrer' : undefined}
-      className="flex items-center gap-4 p-4 rounded-lg bg-dark-50 dark:bg-dark-800/50 border border-dark-200 dark:border-dark-700 group"
-    >
-      <div className="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center text-primary-600 dark:text-primary-400 group-hover:scale-110 transition-transform">
-        {icon}
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-xs text-dark-500 dark:text-dark-400">{label}</p>
-        <p className="font-medium text-dark-900 dark:text-dark-50 truncate">{value}</p>
-        <p className="text-xs text-dark-400 dark:text-dark-500">{description}</p>
-      </div>
-      {href && (
-        <ExternalLink className="w-5 h-5 text-dark-400 dark:text-dark-500 group-hover:text-primary-500 transition-colors" />
-      )}
-    </Content>
-  );
+interface FieldProps {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  type?: string;
+  rows?: number;
+  autoComplete?: string;
 }
 
-function FormField({ label, name, type, value, onChange, placeholder, required, disabled, rows }: { label: string; name: string; type: string; value: string; onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void; placeholder: string; required: boolean; disabled: boolean; rows?: number }) {
-  const InputComponent = type === 'textarea' ? 'textarea' : 'input';
-
+function Field({ label, name, value, onChange, type = 'text', rows, autoComplete }: FieldProps) {
   return (
     <div>
-      <label htmlFor={name} className="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-1.5">
-        {label} {required && <span className="text-primary-500">*</span>}
+      <label htmlFor={name} className="mb-1.5 block font-sans text-sm font-medium text-dark-800 dark:text-dark-200">
+        {label}
       </label>
-      <InputComponent
-        id={name}
-        name={name}
-        type={type === 'textarea' ? undefined : type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        required={required}
-        disabled={disabled}
-        rows={rows}
-        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-dark-900 border border-dark-200 dark:border-dark-700 text-dark-900 dark:text-dark-50 placeholder-dark-400 dark:placeholder-dark-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-      />
+      {rows ? (
+        <textarea id={name} name={name} value={value} onChange={onChange} rows={rows} required className="field resize-y" />
+      ) : (
+        <input id={name} name={name} type={type} value={value} onChange={onChange} required autoComplete={autoComplete} className="field" />
+      )}
     </div>
   );
 }

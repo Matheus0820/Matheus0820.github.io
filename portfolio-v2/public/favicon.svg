@@ -1,10 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#38bdf8;stop-opacity:1" />
+    <radialGradient id="g" cx="50%" cy="50%" r="50%">
+      <stop offset="35%" stop-color="#0ea5e9" stop-opacity=".45"/>
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="d" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#0369a1" stop-opacity="0"/>
+      <stop offset=".2" stop-color="#0284c7"/>
+      <stop offset=".45" stop-color="#38bdf8"/>
+      <stop offset=".6" stop-color="#e0f2fe"/>
+      <stop offset=".82" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#0369a1" stop-opacity="0"/>
     </linearGradient>
+    <clipPath id="f"><rect x="0" y="50" width="100" height="50"/></clipPath>
   </defs>
-  <rect width="100" height="100" rx="20" fill="url(#grad)"/>
-  <text x="50" y="68" font-family="Arial, sans-serif" font-size="50" font-weight="bold" fill="white" text-anchor="middle">MR</text>
+  <rect width="100" height="100" rx="22" fill="#020617"/>
+  <circle cx="50" cy="50" r="48" fill="url(#g)"/>
+  <g transform="rotate(-14 50 50)">
+    <path fill="url(#d)" fill-rule="evenodd" d="M3 50a47 6.5 0 1 0 94 0a47 6.5 0 1 0-94 0ZM26 50a24 2.8 0 1 0 48 0a24 2.8 0 1 0-48 0Z"/>
+    <path d="M24 50A26 26 0 0 1 76 50" fill="none" stroke="url(#d)" stroke-width="5.5" stroke-linecap="round" opacity=".9"/>
+  </g>
+  <circle cx="50" cy="50" r="19.5" fill="#000" stroke="#7dd3fc" stroke-width="1.4"/>
+  <g transform="rotate(-14 50 50)">
+    <path clip-path="url(#f)" fill="url(#d)" fill-rule="evenodd" d="M3 50a47 6.5 0 1 0 94 0a47 6.5 0 1 0-94 0ZM26 50a24 2.8 0 1 0 48 0a24 2.8 0 1 0-48 0Z"/>
+  </g>
 </svg>
