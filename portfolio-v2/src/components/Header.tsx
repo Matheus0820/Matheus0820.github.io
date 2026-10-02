@@ -6,6 +6,7 @@ import { personalInfo } from '../data/portfolio';
 const navLinks = [
   { href: '#sobre', label: 'Sobre' },
   { href: '#experiencia', label: 'Experiência' },
+  { href: '#projetos', label: 'Projetos' },
   { href: '#formacao', label: 'Formação' },
   { href: '#habilidades', label: 'Habilidades' },
   { href: '#contato', label: 'Contato' },

@@ -17,53 +17,13 @@ export interface Experience {
   period: string;
   description: string[];
   technologies: string[];
+  links?: { label: string; url: string }[];
 }
 
 export interface Participation {
   name: string;
   short: string;
   url: string;
-}
-
-export interface SocialLink {
-  name: string;
-  url: string;
-  icon: string;
-}
-
-export interface Fact {
-  label: string;
-  value: string;
-}
-
-export interface Publication {
-  title: string;
-  authors: string;
-  venue: string;
-  kind: string;
-}
-
-// Tipagem para os Projetos em Destaque
-export interface Project {
-  name: string;
-  description: string;
-  language: string;
-  topics: string[];
-  featured?: boolean;
-  url: string;
-  homepage?: string;
-}
-
-// Tipagem para a Startup Opt.en
-export interface StartupInfo {
-  name: string;
-  tagline: string;
-  logo: string;
-  description: string;
-  website?: string;
-  technologies: string[];
-  achievements: string[];
-  stats: { label: string; value: string }[];
 }
 
 export const personalInfo = {
@@ -73,6 +33,7 @@ export const personalInfo = {
   subtitle: "Aplicações web, otimização de rotas e Machine Learning",
   email: "mr7052954@gmail.com",
   github: "https://github.com/Matheus0820",
+  linkedin: "https://www.linkedin.com/in/matheus-ramos-ferreira-da-silva-b40987226",
   lattes: "http://lattes.cnpq.br/3863511228005347",
   location: "Natal, RN - Brasil",
   intro: "Estudo Ciências e Tecnologia na UFRN, desenvolvo aplicações web com Python e Django e pesquiso otimização de rotas com Google OR-Tools como bolsista do PRH-25 da ANP.",
@@ -109,13 +70,14 @@ export const experience: Experience[] = [
   {
     role: "Fundador",
     company: "Opt.en Solutions (Inova Simples)",
-    period: "2026 - Atual",
+    period: "2025 - Atual",
     description: [
       "Startup nascida da pesquisa do PRH-25 da ANP, focada em roteirização sustentável para o setor de energia",
       "Aprovada com nota máxima na 1ª fase do edital Centelha Sebrae RN e selecionada para o programa SuperNova do Sebrae",
       "Lançamento do site oficial e desenvolvimento do MVP com algoritmos de otimização de rotas",
     ],
     technologies: ["Python", "Google OR-Tools", "VRP / CVRPTW", "Vercel"],
+    links: [{ label: "Site oficial", url: "https://optensolutions.vercel.app/" }],
   },
   {
     role: "Programador Full Stack, Cientista de Dados e Pesquisador Operacional",
@@ -128,6 +90,7 @@ export const experience: Experience[] = [
       "Resumo em anais na IX Semana de Ciências e Tecnologia da UFRN: \"Rotas Sustentáveis para a Transição Energética\"",
     ],
     technologies: ["Python", "Google OR-Tools", "Machine Learning", "APIs", "Pandas", "NumPy"],
+    links: [{ label: "Site do programa PRH-25", url: "https://prh25.ect.ufrn.br/" }],
   },
   {
     role: "Programador Full Stack",
@@ -139,6 +102,7 @@ export const experience: Experience[] = [
       "Versionamento de código",
     ],
     technologies: ["Desenvolvimento Web", "Git", "Documentação"],
+    links: [{ label: "Repositório no GitHub", url: "https://github.com/Matheus0820/Project-SiGLab" }],
   },
   {
     role: "Programador Full Stack (Bolsa de Pesquisa - Voluntário)",
@@ -149,6 +113,7 @@ export const experience: Experience[] = [
       "Desenvolvimento de site completo de cunho educacional com o framework Django",
     ],
     technologies: ["Python", "Django", "Git"],
+    links: [{ label: "Site do OVNE", url: "https://ovne.ect.ufrn.br/" }],
   },
   {
     role: "Programador Full Stack (Estágio e Bolsa de Apoio Técnico)",
@@ -208,6 +173,7 @@ export const skills: Skill[] = [
   { name: "Gerenciamento Ágil", category: "concept" },
 ];
 
+// Projetos de extensão e pesquisa dos quais participo/participei
 export const participations: Participation[] = [
   { name: "Observatório de Valores do Nordeste", short: "OVNE", url: "https://ovne.ect.ufrn.br" },
   { name: "Caravana Espacial", short: "Caravana Espacial", url: "https://caravanaespacial.ect.ufrn.br" },
@@ -215,75 +181,71 @@ export const participations: Participation[] = [
   { name: "Um Robô por Aluno", short: "URA", url: "https://www.umroboporaluno.org" },
 ];
 
-export const socialLinks: SocialLink[] = [
+export const socialLinks = [
   { name: "GitHub", url: "https://github.com/Matheus0820", icon: "github" },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/matheus-ramos-ferreira-da-silva-b40987226", icon: "linkedin" },
   { name: "Currículo Lattes", url: "http://lattes.cnpq.br/3863511228005347", icon: "book" },
   { name: "Email", url: "mailto:mr7052954@gmail.com", icon: "mail" },
 ];
 
-export const about: string[] = [
+export const about = [
   "Curso Bacharelado em Ciências e Tecnologia, com ênfase em Tecnologia da Computação, na ECT/UFRN. Desde 2023 trabalho com desenvolvimento web, principalmente com Python e Django, em projetos da universidade e da RNP.",
   "Como bolsista do PRH-25 da ANP, desenvolvo algoritmos de otimização e roteirização de veículos com Google OR-Tools. Dessa pesquisa nasceu a Opt.en Solutions, startup que fundei, e um resumo nos anais da IX Semana de Ciências e Tecnologia da UFRN.",
   "Também integro o grupo de trabalho do Governo do RN que desenvolve o novo sistema do Diário Oficial do Estado.",
 ];
 
-export const facts: Fact[] = [
+export const facts = [
   { label: "Localização", value: "Natal, RN - Brasil" },
   { label: "Formação", value: "Bacharelado em Ciências e Tecnologia (Tecnologia da Computação), UFRN, 6º período" },
   { label: "Atuação", value: "Bolsista PRH-25 da ANP e membro do Grupo de Trabalho do Diário Oficial do RN" },
 ];
 
-export const currentFocus: string[] = [
+export const currentFocus = [
   "Otimização de rotas (VRP e CVRPTW) com Google OR-Tools",
   "MVP da Opt.en Solutions e parcerias com empresas de energia solar",
   "Sistema do Diário Oficial do RN (GT GAC/SEPLAN)",
   "Machine Learning aplicado à análise de dados",
 ];
 
-export const publication: Publication = {
+export const publication = {
   title: "Rotas sustentáveis para a transição energética: desenvolvimento de algoritmos e da modelagem de negócios da Opt.en",
   authors: "Ramos, M.; Carvalho, Z.; Santi, É.",
   venue: "IX Semana de Ciências e Tecnologia da UFRN",
   kind: "Resumo em anais",
 };
 
-// --- Exportações para sanar os erros dos componentes Projects.tsx e Startup.tsx ---
+export interface LiveProject {
+  name: string;
+  host: string;
+  description: string;
+  links: { label: string; url: string; kind: 'site' | 'code' }[];
+}
 
-export const featuredProjects: Project[] = [
+// Projetos que desenvolvi e que estão no ar
+export const liveProjects: LiveProject[] = [
   {
-    name: "rotas-sustentaveis",
-    description: "Plataforma e algoritmos de otimização de rotas sustentáveis (CVRPTW e WSRP) utilizando Google OR-Tools para a transição energética.",
-    language: "Python",
-    topics: ["optimization", "vrp", "cvrptw", "machine-learning", "routing"],
-    featured: true,
-    url: "https://github.com/Matheus0820/rotas-sustentaveis",
-    homepage: "https://opten.com.br",
+    name: "Rallyne Silva Fotografia",
+    host: "rallynefotografia.vercel.app",
+    description: "Site de portfólio de uma fotógrafa, com galeria de ensaios, casamentos e eventos registrados com luz natural. Desenvolvi o front-end e o back-end, e o site está publicado na Vercel.",
+    links: [
+      { label: "Ver site", url: "https://rallynefotografia.vercel.app/", kind: "site" },
+      { label: "Front-end", url: "https://github.com/Matheus0820/portfolio_rallyne_frontend", kind: "code" },
+      { label: "Back-end", url: "https://github.com/Matheus0820/portfolio_rallyne_backend", kind: "code" },
+    ],
   },
   {
-    name: "diario-oficial-rn",
-    description: "Sistema informatizado para gestão, processamento e publicação de matérias oficiais pelo Departamento Estadual de Imprensa (DEI/RN).",
-    language: "TypeScript",
-    topics: ["web", "fullstack", "react", "backend"],
-    featured: true,
-    url: "https://github.com/Matheus0820",
+    name: "Observatório de Valores do Nordeste (OVNE)",
+    host: "ovne.ect.ufrn.br",
+    description: "Site educacional do projeto de iniciação científica da ECT/UFRN, que divulga o setor aeroespacial do Nordeste. Desenvolvido com Django durante minha bolsa de pesquisa voluntária (2023–2024).",
+    links: [{ label: "Ver site", url: "https://ovne.ect.ufrn.br/", kind: "site" }],
+  },
+  {
+    name: "Opt.en Solutions",
+    host: "optensolutions.vercel.app",
+    description: "Site institucional da startup que fundei, disponível em português, inglês e alemão, com uma página de demonstração do Opt.en Fleet, a plataforma de roteirização. Publicado na Vercel.",
+    links: [
+      { label: "Ver site", url: "https://optensolutions.vercel.app/", kind: "site" },
+      { label: "Demo Opt.en Fleet", url: "https://optensolutions.vercel.app/Opten_fleet_demo.html", kind: "site" },
+    ],
   },
 ];
-
-export const startupInfo: StartupInfo = {
-  name: "Opt.en Solutions",
-  tagline: "Rotas sustentáveis para a transição energética",
-  logo: "O",
-  description: "Startup nascida da pesquisa do PRH-25 da ANP na UFRN, desenvolvendo soluções inteligentes de roteirização e logística eficiente com inteligência artificial para o setor energético.",
-  website: "https://opten.com.br",
-  technologies: ["Python", "Google OR-Tools", "VRP / CVRPTW", "Machine Learning", "APIs", "Vercel"],
-  achievements: [
-    "Aprovada com nota máxima na 1ª fase do edital Centelha Sebrae RN",
-    "Selecionada para o programa de aceleração SuperNova do Sebrae",
-    "Desenvolvimento e validação do MVP com empresas parceiras de energia solar",
-    "Publicação científica nos anais da IX Semana de C&T da UFRN",
-  ],
-  stats: [
-    { label: "Redução de CO₂", value: "Até 25%" },
-    { label: "Redução de Custos", value: "Até 20%" },
-  ],
-};

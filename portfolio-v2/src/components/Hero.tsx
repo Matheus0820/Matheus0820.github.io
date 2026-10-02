@@ -1,4 +1,4 @@
-import { Mail, Github, BookOpen } from 'lucide-react';
+import { Mail, Github, Linkedin, BookOpen } from 'lucide-react';
 import { BlackHole } from './BlackHole';
 import { personalInfo } from '../data/portfolio';
 
@@ -15,18 +15,22 @@ export function Hero() {
           </p>
           <p className="mt-6 max-w-xl text-lg text-dark-600 dark:text-dark-300">{personalInfo.intro}</p>
 
-          <div className="mt-9 flex flex-wrap gap-3">
-            <a href="#contato" className="btn-primary">
+          <div className="mt-9 flex flex-wrap gap-2.5">
+            <a href="#contato" className="btn-primary !px-4">
               <Mail className="h-4 w-4" aria-hidden="true" />
               Entrar em contato
             </a>
-            <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="btn-outline">
+            <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="btn-outline !px-4">
               <Github className="h-4 w-4" aria-hidden="true" />
               GitHub
             </a>
-            <a href={personalInfo.lattes} target="_blank" rel="noopener noreferrer" className="btn-outline">
+            <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="btn-outline !px-4">
+              <Linkedin className="h-4 w-4" aria-hidden="true" />
+              LinkedIn
+            </a>
+            <a href={personalInfo.lattes} target="_blank" rel="noopener noreferrer" className="btn-outline !px-4">
               <BookOpen className="h-4 w-4" aria-hidden="true" />
-              Currículo Lattes
+              Lattes
             </a>
           </div>
         </div>

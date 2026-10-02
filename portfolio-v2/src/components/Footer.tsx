@@ -1,9 +1,10 @@
-import { Github, BookOpen, Mail } from 'lucide-react';
+import { Github, Linkedin, BookOpen, Mail } from 'lucide-react';
 import { personalInfo } from '../data/portfolio';
 
 export function Footer() {
   const links = [
     { label: 'GitHub', href: personalInfo.github, icon: Github },
+    { label: 'LinkedIn', href: personalInfo.linkedin, icon: Linkedin },
     { label: 'Currículo Lattes', href: personalInfo.lattes, icon: BookOpen },
     { label: 'E-mail', href: `mailto:${personalInfo.email}`, icon: Mail },
   ];

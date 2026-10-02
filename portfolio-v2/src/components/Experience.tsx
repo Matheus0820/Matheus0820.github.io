@@ -32,6 +32,19 @@ export function Experience() {
                     <span className="font-medium text-dark-700 dark:text-dark-200">Tecnologias:</span>{' '}
                     {item.technologies.join(', ')}
                   </p>
+
+                  {item.links && (
+                    <p className="mt-2 font-sans text-sm">
+                      {item.links.map((link, index) => (
+                        <span key={link.url}>
+                          {index > 0 && <span className="text-dark-400"> | </span>}
+                          <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-link">
+                            {link.label}
+                          </a>
+                        </span>
+                      ))}
+                    </p>
+                  )}
                 </div>
               </div>
             </li>

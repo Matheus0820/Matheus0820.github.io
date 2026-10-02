@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Github, BookOpen, MapPin, Send } from 'lucide-react';
+import { Mail, Github, Linkedin, BookOpen, MapPin, Send } from 'lucide-react';
 import { personalInfo } from '../data/portfolio';
 
 export function Contact() {
@@ -19,6 +19,7 @@ export function Contact() {
 
   const channels = [
     { label: 'E-mail', value: personalInfo.email, href: `mailto:${personalInfo.email}`, icon: Mail },
+    { label: 'LinkedIn', value: 'Matheus Ramos Ferreira da Silva', href: personalInfo.linkedin, icon: Linkedin },
     { label: 'GitHub', value: '@Matheus0820', href: personalInfo.github, icon: Github },
     { label: 'Currículo Lattes', value: 'Matheus Ramos', href: personalInfo.lattes, icon: BookOpen },
   ];
