@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { Rocket, Brain, Target, Zap, BarChart, GitBranch, Server, Cpu, Cloud, CheckCircle, TrendingDown, TrendingUp, Leaf } from 'lucide-react';
 import { startupInfo } from '../data/portfolio';
 
@@ -9,7 +9,7 @@ interface StatItem {
 }
 
 export function Startup() {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -29,7 +29,7 @@ export function Startup() {
         ease: 'easeOut',
       },
     },
-  };
+  } as const;
 
   const techIcons: Record<string, React.ReactNode> = {
     Python: <Brain className="w-5 h-5" />,
@@ -40,8 +40,8 @@ export function Startup() {
     Vercel: <Cloud className="w-5 h-5" />,
   };
 
-  // Suporte flexível para compatibilidade com a propriedade no arquivo de dados
-  const technologiesList: string[] = startupInfo.technologies || startupInfo.techStack || [];
+  // Suporte flexível para compatibilidade com as propriedades no arquivo de dados
+  const technologiesList: string[] = (startupInfo as Record<string, any>).technologies || (startupInfo as Record<string, any>).techStack || [];
   const achievementsList: string[] = startupInfo.achievements || [];
   const statsList: StatItem[] = startupInfo.stats || [];
 

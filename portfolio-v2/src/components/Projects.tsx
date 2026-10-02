@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { Github, ExternalLink, Code, Star, FolderOpen } from 'lucide-react';
 import { featuredProjects, Project } from '../data/portfolio';
 
 export function Projects() {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -24,7 +24,7 @@ export function Projects() {
         ease: 'easeOut',
       },
     },
-  };
+  } as const; // <--- Adicionado "as const" aqui
 
   const filterOptions = ['Todos', 'Destaque', 'Backend', 'Frontend', 'ML/Otimização', 'Pesquisa'];
   const [activeFilter, setActiveFilter] = useState('Todos');
@@ -147,7 +147,7 @@ function ProjectCard({ project, index, languageColors }: { project: Project; ind
         duration: 0.5,
       },
     },
-  };
+  } as const; // <--- Adicionado "as const" aqui
 
   const topics = project.topics || [];
 
