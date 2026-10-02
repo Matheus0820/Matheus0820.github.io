@@ -43,6 +43,29 @@ export interface Publication {
   kind: string;
 }
 
+// Tipagem para os Projetos em Destaque
+export interface Project {
+  name: string;
+  description: string;
+  language: string;
+  topics: string[];
+  featured?: boolean;
+  url: string;
+  homepage?: string;
+}
+
+// Tipagem para a Startup Opt.en
+export interface StartupInfo {
+  name: string;
+  tagline: string;
+  logo: string;
+  description: string;
+  website?: string;
+  technologies: string[];
+  achievements: string[];
+  stats: { label: string; value: string }[];
+}
+
 export const personalInfo = {
   name: "Matheus Ramos",
   fullName: "Matheus Ramos Ferreira da Silva",
@@ -222,4 +245,45 @@ export const publication: Publication = {
   authors: "Ramos, M.; Carvalho, Z.; Santi, É.",
   venue: "IX Semana de Ciências e Tecnologia da UFRN",
   kind: "Resumo em anais",
+};
+
+// --- Exportações para sanar os erros dos componentes Projects.tsx e Startup.tsx ---
+
+export const featuredProjects: Project[] = [
+  {
+    name: "rotas-sustentaveis",
+    description: "Plataforma e algoritmos de otimização de rotas sustentáveis (CVRPTW e WSRP) utilizando Google OR-Tools para a transição energética.",
+    language: "Python",
+    topics: ["optimization", "vrp", "cvrptw", "machine-learning", "routing"],
+    featured: true,
+    url: "https://github.com/Matheus0820/rotas-sustentaveis",
+    homepage: "https://opten.com.br",
+  },
+  {
+    name: "diario-oficial-rn",
+    description: "Sistema informatizado para gestão, processamento e publicação de matérias oficiais pelo Departamento Estadual de Imprensa (DEI/RN).",
+    language: "TypeScript",
+    topics: ["web", "fullstack", "react", "backend"],
+    featured: true,
+    url: "https://github.com/Matheus0820",
+  },
+];
+
+export const startupInfo: StartupInfo = {
+  name: "Opt.en Solutions",
+  tagline: "Rotas sustentáveis para a transição energética",
+  logo: "O",
+  description: "Startup nascida da pesquisa do PRH-25 da ANP na UFRN, desenvolvendo soluções inteligentes de roteirização e logística eficiente com inteligência artificial para o setor energético.",
+  website: "https://opten.com.br",
+  technologies: ["Python", "Google OR-Tools", "VRP / CVRPTW", "Machine Learning", "APIs", "Vercel"],
+  achievements: [
+    "Aprovada com nota máxima na 1ª fase do edital Centelha Sebrae RN",
+    "Selecionada para o programa de aceleração SuperNova do Sebrae",
+    "Desenvolvimento e validação do MVP com empresas parceiras de energia solar",
+    "Publicação científica nos anais da IX Semana de C&T da UFRN",
+  ],
+  stats: [
+    { label: "Redução de CO₂", value: "Até 25%" },
+    { label: "Redução de Custos", value: "Até 20%" },
+  ],
 };
