@@ -1,4 +1,6 @@
-import { experience, education, publication } from '../data/portfolio';
+import { motion } from 'framer-motion';
+import { experience, education } from '../data/portfolio';
+import { Award, TrendingUp } from 'lucide-react';
 
 export function Experience() {
   return (
@@ -7,8 +9,15 @@ export function Experience() {
         <h2 className="section-title">Experiência</h2>
 
         <ol className="min-w-0 space-y-12 border-l border-dark-200 pl-8 dark:border-dark-800">
-          {experience.map((item) => (
-            <li key={`${item.company}-${item.period}`} className="relative">
+          {experience.map((item, index) => (
+            <motion.li
+              key={`${item.company}-${item.period}`}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="relative"
+            >
               <span
                 aria-hidden="true"
                 className="absolute -left-[37.5px] top-2 h-2.5 w-2.5 rounded-full bg-primary-500 ring-4 ring-white dark:ring-dark-950"
@@ -35,9 +44,9 @@ export function Experience() {
 
                   {item.links && (
                     <p className="mt-2 font-sans text-sm">
-                      {item.links.map((link, index) => (
+                      {item.links.map((link, i) => (
                         <span key={link.url}>
-                          {index > 0 && <span className="text-dark-400"> | </span>}
+                          {i > 0 && <span className="text-dark-400"> | </span>}
                           <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-link">
                             {link.label}
                           </a>
@@ -45,9 +54,32 @@ export function Experience() {
                       ))}
                     </p>
                   )}
+
+                  {item.metrics && item.metrics.length > 0 && (
+                    <div className="mt-4 pt-4 border-t border-dark-200 dark:border-dark-800">
+                      <h4 className="font-sans text-sm font-semibold text-dark-900 dark:text-dark-50 mb-3 flex items-center gap-2">
+                        <TrendingUp className="h-4 w-4 text-primary-600 dark:text-primary-400" aria-hidden="true" />
+                        Métricas & Conquistas
+                      </h4>
+                      <ul className="space-y-2">
+                        {item.metrics.map((metric, i) => (
+                          <motion.li
+                            key={i}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.3 + i * 0.05 }}
+                            className="flex items-start gap-2 text-sm text-dark-600 dark:text-dark-300"
+                          >
+                            <Award className="h-4 w-4 flex-shrink-0 text-primary-600 dark:text-primary-400 mt-0.5" aria-hidden="true" />
+                            {metric}
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
-            </li>
+            </motion.li>
           ))}
         </ol>
       </div>
@@ -74,14 +106,6 @@ export function Education() {
               </li>
             ))}
           </ul>
-
-          <div className="mt-12 max-w-2xl">
-            <h3 className="subtitle">Publicação</h3>
-            <p className="mt-3 text-dark-900 dark:text-dark-100">{publication.title}</p>
-            <p className="mt-1 text-dark-600 dark:text-dark-300">
-              {publication.authors}. {publication.venue}. {publication.kind}.
-            </p>
-          </div>
         </div>
       </div>
     </section>

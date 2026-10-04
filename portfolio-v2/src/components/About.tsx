@@ -1,5 +1,5 @@
-import { ExternalLink } from 'lucide-react';
-import { about, facts, currentFocus, participations } from '../data/portfolio';
+// import { ExternalLink } from 'lucide-react';
+import { about, facts, currentFocus } from '../data/portfolio';
 
 export function About() {
   return (
@@ -23,36 +23,15 @@ export function About() {
             ))}
           </dl>
 
-          <div className="mt-12 grid gap-10 md:grid-cols-2">
-            <div>
-              <h3 className="subtitle">Foco atual</h3>
-              <ul className="mt-4 space-y-3">
-                {currentFocus.map((item) => (
-                  <li key={item} className="relative pl-5 before:absolute before:left-0 before:top-[0.85em] before:h-px before:w-3 before:bg-primary-500">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="subtitle">Projetos de extensão e pesquisa</h3>
-              <ul className="mt-4 space-y-3">
-                {participations.map((item) => (
-                  <li key={item.short}>
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-link inline-flex items-baseline gap-1.5"
-                    >
-                      {item.name}
-                      <ExternalLink className="h-3.5 w-3.5 flex-shrink-0 translate-y-0.5" aria-hidden="true" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="mt-12">
+            <h3 className="subtitle">Foco atual</h3>
+            <ul className="mt-4 space-y-3 max-w-xl">
+              {currentFocus.map((item) => (
+                <li key={item} className="relative pl-5 before:absolute before:left-0 before:top-[0.85em] before:h-px before:w-3 before:bg-primary-500">
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
