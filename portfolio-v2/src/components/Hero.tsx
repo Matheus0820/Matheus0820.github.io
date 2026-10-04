@@ -4,8 +4,10 @@ import { personalInfo } from '../data/portfolio';
 
 export function Hero() {
   return (
-    <section id="inicio" className="relative overflow-hidden pb-16 pt-28 sm:pb-24 sm:pt-36">
-      <div className="wrap grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-6">
+    <>
+      <a href="#main-content" className="skip-link">Pular para o conteúdo principal</a>
+      <section id="inicio" className="relative overflow-hidden pb-16 pt-28 sm:pb-24 sm:pt-36">
+        <div className="wrap grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-6">
         <div>
           <h1 className="text-5xl font-bold leading-[1.05] tracking-tight sm:whitespace-nowrap sm:text-6xl lg:text-[4.25rem]">
             {personalInfo.name}
@@ -40,5 +42,6 @@ export function Hero() {
         </div>
       </div>
     </section>
+    </>
   );
 }

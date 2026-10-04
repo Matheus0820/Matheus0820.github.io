@@ -13,7 +13,7 @@ function App() {
     <>
       <Starfield />
       <Header />
-      <main>
+      <main id="main-content" role="main">
         <Hero />
         <About />
         <Experience />

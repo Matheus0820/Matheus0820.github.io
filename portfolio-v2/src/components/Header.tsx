@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { BlackHole } from './BlackHole';
 import { personalInfo } from '../data/portfolio';
+import { useTheme } from '../context/ThemeContext';
 
 const navLinks = [
   { href: '#sobre', label: 'Sobre' },
@@ -14,8 +15,9 @@ const navLinks = [
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains('dark'));
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === 'dark';
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 8);
@@ -23,17 +25,6 @@ export function Header() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const toggleTheme = () => {
-    const next = !isDark;
-    setIsDark(next);
-    document.documentElement.classList.toggle('dark', next);
-    try {
-      localStorage.setItem('theme', next ? 'dark' : 'light');
-    } catch {
-      /* armazenamento indisponível: o tema vale só nesta visita */
-    }
-  };
 
   const themeButton = (
     <button

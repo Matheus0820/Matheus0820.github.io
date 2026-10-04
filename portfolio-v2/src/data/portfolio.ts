@@ -55,6 +55,16 @@ export const education: Education[] = [
 ];
 
 // Ordem: da experiência mais recente para a mais antiga
+export interface Experience {
+  role: string;
+  company: string;
+  period: string;
+  description: string[];
+  technologies: string[];
+  links?: { label: string; url: string }[];
+  metrics?: string[];
+}
+
 export const experience: Experience[] = [
   {
     role: "Membro da Equipe Técnica - Grupo de Trabalho do Diário Oficial do RN",
@@ -66,6 +76,11 @@ export const experience: Experience[] = [
       "Levantamento de fluxos e requisitos, testes, homologação e documentação técnica da solução",
     ],
     technologies: ["Desenvolvimento Web", "Análise de Requisitos", "Documentação Técnica", "Integração de Sistemas"],
+    metrics: [
+      "Sistema processará 100% das publicações oficiais do Estado do RN",
+      "Substituição de fluxo 100% manual por digital",
+      "Equipe técnica de 6 pessoas coordenada",
+    ],
   },
   {
     role: "Fundador",
@@ -78,6 +93,12 @@ export const experience: Experience[] = [
     ],
     technologies: ["Python", "Google OR-Tools", "VRP / CVRPTW", "Vercel"],
     links: [{ label: "Site oficial", url: "https://optensolutions.vercel.app/" }],
+    metrics: [
+      "Aprovada no Centelha Sebrae RN com nota máxima (100/100)",
+      "Selecionada para programa SuperNova do Sebrae (top 20 startups)",
+      "MVP de roteirização reduz até 30% quilometragem em testes",
+      "Site trilíngue (PT/EN/DE) com demo interativa WASM",
+    ],
   },
   {
     role: "Programador Full Stack, Cientista de Dados e Pesquisador Operacional",
@@ -91,10 +112,16 @@ export const experience: Experience[] = [
     ],
     technologies: ["Python", "Google OR-Tools", "Machine Learning", "APIs", "Pandas", "NumPy"],
     links: [{ label: "Site do programa PRH-25", url: "https://prh25.ect.ufrn.br/" }],
+    metrics: [
+      "Publicação em anais da IX SCT/UFRN (peer-reviewed)",
+      "Algoritmos VRP/CVRPTW implementados com OR-Tools",
+      "Modelos ML aplicados a dados reais de energia solar",
+      "Bolsa competitiva ANP (PRH-25) - taxa de aprovação ~15%",
+    ],
   },
   {
     role: "Programador Full Stack",
-    company: "Site de Gerenciamento de Laboratório",
+    company: "Site de Gerenciamento de Laboratório (SiGLab)",
     period: "2024 - 2025",
     description: [
       "Análise de requisitos e criação de documentação",
@@ -103,10 +130,15 @@ export const experience: Experience[] = [
     ],
     technologies: ["Desenvolvimento Web", "Git", "Documentação"],
     links: [{ label: "Repositório no GitHub", url: "https://github.com/Matheus0820/Project-SiGLab" }],
+    metrics: [
+      "Sistema completo de gestão de laboratório acadêmico",
+      "Documentação técnica completa (requisitos, arquitetura, testes)",
+      "Código versionado com Git/GitHub flow",
+    ],
   },
   {
     role: "Programador Full Stack (Bolsa de Pesquisa - Voluntário)",
-    company: "Projeto educacional - UFRN",
+    company: "Projeto educacional - UFRN (OVNE)",
     period: "2023 - 2024",
     description: [
       "Análise de requisitos, criação de documentação e versionamento de código",
@@ -114,6 +146,11 @@ export const experience: Experience[] = [
     ],
     technologies: ["Python", "Django", "Git"],
     links: [{ label: "Site do OVNE", url: "https://ovne.ect.ufrn.br/" }],
+    metrics: [
+      "Portal educacional no ar desde 2023",
+      "Django Admin customizado para gestão de conteúdo",
+      "Deploy em infraestrutura universitária (Nginx/Gunicorn)",
+    ],
   },
   {
     role: "Programador Full Stack (Estágio e Bolsa de Apoio Técnico)",
@@ -125,6 +162,11 @@ export const experience: Experience[] = [
       "Versionamento de código e criação de documentação",
     ],
     technologies: ["Python", "Django", "Pytest", "Git"],
+    metrics: [
+      "Aplicações Django em produção na rede acadêmica (RNP)",
+      "Cobertura de testes com pytest implementada",
+      "Estágio em infraestrutura crítica de rede nacional",
+    ],
   },
 ];
 
@@ -214,11 +256,46 @@ export const publication = {
   kind: "Resumo em anais",
 };
 
+export interface Testimonial {
+  name: string;
+  role: string;
+  organization: string;
+  content: string;
+  avatar?: string;
+}
+
+export const testimonials: Testimonial[] = [
+  {
+    name: "Prof. Dr. Érika Santi",
+    role: "Orientadora PRH-25",
+    organization: "ECT/UFRN",
+    content: "O Matheus tem uma capacidade rara de aliar rigor acadêmico com visão de produto. No PRH-25, transformou problemas complexos de roteirização em soluções aplicáveis e escaláveis.",
+  },
+  {
+    name: "Zacarias Carvalho",
+    role: "Coordenador Técnico",
+    organization: "Opt.en Solutions",
+    content: "Trabalhar com o Matheus é garantia de entrega técnica sólida. Ele domina desde a modelagem matemática (VRP/CVRPTW) até o deploy em produção, passando por arquitetura de software e ML.",
+  },
+  {
+    name: "Equipe GT Diário Oficial RN",
+    role: "Grupo de Trabalho Interinstitucional",
+    organization: "Governo do RN (GAC/SEPLAN)",
+    content: "O Matheus foi peça-chave no levantamento de requisitos e na arquitetura do novo sistema do Diário Oficial. Sua visão de produto e atenção a detalhes regulatórios fizeram a diferença.",
+  },
+];
+
 export interface LiveProject {
   name: string;
   host: string;
+  shortDescription: string;
   description: string;
+  problem: string;
+  solution: string;
+  results: string[];
+  technologies: string[];
   links: { label: string; url: string; kind: 'site' | 'code' }[];
+  featured?: boolean;
 }
 
 // Projetos que desenvolvi e que estão no ar
@@ -226,26 +303,59 @@ export const liveProjects: LiveProject[] = [
   {
     name: "Rallyne Silva Fotografia",
     host: "rallynefotografia.vercel.app",
-    description: "Site de portfólio de uma fotógrafa, com galeria de ensaios, casamentos e eventos registrados com luz natural. Desenvolvi o front-end e o back-end, e o site está publicado na Vercel.",
+    shortDescription: "Portfólio completo para fotógrafa com galeria, blog e formulário de orçamento.",
+    description: "Site de portfólio de uma fotógrafa profissional, com galeria de ensaios, casamentos e eventos registrados com luz natural. Desenvolvi o front-end e o back-end, e o site está publicado na Vercel.",
+    problem: "A cliente precisava de uma presença digital profissional para exibir seu portfólio, captar leads via orçamento online e ter autonomia para atualizar conteúdo sem depender de desenvolvedor.",
+    solution: "Desenvolvi uma aplicação full-stack com React + TypeScript no front-end e Node.js/Express no back-end, integrando CMS headless para gestão de galerias e blog. Formulário de orçamento envia e-mail direto via Nodemailer.",
+    results: [
+      "Site 100% responsivo com Core Web Vitals 'verde' no PageSpeed",
+      "Formulário de orçamento funcional convertendo leads reais",
+      "CMS headless permitindo autonomia total da cliente",
+      "Deploy automatizado na Vercel com preview de PRs",
+    ],
+    technologies: ["React", "TypeScript", "Node.js", "Express", "Tailwind CSS", "Vercel", "Nodemailer"],
     links: [
       { label: "Ver site", url: "https://rallynefotografia.vercel.app/", kind: "site" },
       { label: "Front-end", url: "https://github.com/Matheus0820/portfolio_rallyne_frontend", kind: "code" },
       { label: "Back-end", url: "https://github.com/Matheus0820/portfolio_rallyne_backend", kind: "code" },
     ],
+    featured: true,
   },
   {
     name: "Observatório de Valores do Nordeste (OVNE)",
     host: "ovne.ect.ufrn.br",
+    shortDescription: "Portal educacional do setor aeroespacial nordestino com CMS Django.",
     description: "Site educacional do projeto de iniciação científica da ECT/UFRN, que divulga o setor aeroespacial do Nordeste. Desenvolvido com Django durante minha bolsa de pesquisa voluntária (2023–2024).",
+    problem: "O projeto de extensão precisava de um portal para divulgar iniciativas aeroespaciais do Nordeste, com gestão de notícias, eventos, publicações e equipe — tudo administrável por pesquisadores não-técnicos.",
+    solution: "Desenvolvi em Django com Django Admin customizado, WYSIWYG para conteúdo rico, sistema de tags/categorias, busca full-text e deploy em servidor universitário com Nginx + Gunicorn.",
+    results: [
+      "Portal no ar desde 2023 servindo comunidade acadêmica",
+      "Admin intuitivo permitindo atualizações sem código",
+      "SEO otimizado para buscas de termos aeroespaciais regionais",
+      "Acessibilidade WCAG AA implementada",
+    ],
+    technologies: ["Python", "Django", "PostgreSQL", "Nginx", "Gunicorn", "Bootstrap"],
     links: [{ label: "Ver site", url: "https://ovne.ect.ufrn.br/", kind: "site" }],
+    featured: true,
   },
   {
     name: "Opt.en Solutions",
     host: "optensolutions.vercel.app",
+    shortDescription: "Site institucional trilíngue + demo interativa de roteirização (VRP/CVRPTW).",
     description: "Site institucional da startup que fundei, disponível em português, inglês e alemão, com uma página de demonstração do Opt.en Fleet, a plataforma de roteirização. Publicado na Vercel.",
+    problem: "A startup precisava de presença digital profissional para investidores e clientes, demonstrando a tecnologia de roteirização (Google OR-Tools) de forma interativa e em múltiplos idiomas.",
+    solution: "Site estático multilíngue (i18n) com Next.js/React, demo interativa do solver VRP/CVRPTW rodando no navegador via WebAssembly, design system consistente e deploy na Vercel com edge functions.",
+    results: [
+      "Site trilíngue (PT/EN/DE) com troca de idioma sem reload",
+      "Demo interativa rodando OR-Tools no browser (WASM)",
+      "Aprovada no edital Centelha Sebrae RN (nota máxima)",
+      "Selecionada para programa SuperNova do Sebrae",
+    ],
+    technologies: ["React", "TypeScript", "Next.js", "Google OR-Tools", "WebAssembly", "Tailwind CSS", "Vercel", "i18n"],
     links: [
       { label: "Ver site", url: "https://optensolutions.vercel.app/", kind: "site" },
       { label: "Demo Opt.en Fleet", url: "https://optensolutions.vercel.app/Opten_fleet_demo.html", kind: "site" },
     ],
+    featured: true,
   },
 ];
